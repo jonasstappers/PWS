@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="2582px" height="351px" viewBox="0 0 2582 351" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12072) - http://www.bohemiancoding.com/sketch -->
+    <title>PWS + jonas + hunter</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="PWS-+-jonas-+-hunter" sketch:type="MSLayerGroup" transform="translate(-13.000000, -130.000000)" font-weight="normal" font-family="Anders" fill="#ECF0F1">
+            <text id="PWS" sketch:type="MSTextLayer" font-size="437">
+                <tspan x="794" y="481">PWS</tspan>
+            </text>
+            <text id="jonas" sketch:type="MSTextLayer" font-size="181" letter-spacing="-12.8000002">
+                <tspan x="0" y="481">jona</tspan>
+                <tspan x="516.053999" y="481">s</tspan>
+            </text>
+            <text id="hunter" sketch:type="MSTextLayer" font-size="181" letter-spacing="-12.8000002">
+                <tspan x="1929" y="481">hunter</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
