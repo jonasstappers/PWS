@@ -25,10 +25,10 @@ img {
     position:absolute;
     top:50%;
     left:50%;
-    margin-top:-50px;
-    margin-left:-50px;
-    height:100px;
-    width:100px;
+    margin-top:-40px;
+    margin-left:-40px;
+    height:80px;
+    width:80px;
     background-color:#F4B350  ;
     border-radius:50%;
 }
@@ -36,11 +36,11 @@ img {
 #m {
     position:absolute;
     top:50%;
-    left:20%;
-    background-color:#03C9A9 ;
+    left:50%;
+    background-color:#1BA39C;
     width:40px;
     height:40px;
     border-radius: 50%;
     margin-top:-20px;
-    margin-left:-20px;
+    margin-left:-420px;
 }
