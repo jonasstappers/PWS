@@ -76,6 +76,12 @@ Vector.prototype.divide = function (vec) {
 	return this;
 };
 
+Vector.prototype.divideScalar = function (scalar) {
+	this.x /= scalar;
+	this.y /= scalar;
+	return this;
+};
+
 Vector.prototype.multiplyX = function (vec) {
     this.x *= vec.x;
     return this;
@@ -89,6 +95,12 @@ Vector.prototype.multiplyY = function (vec) {
 Vector.prototype.multiply = function (vec) {
 	this.x *= vec.x;
 	this.y *= vec.y;
+	return this;
+};
+
+Vector.prototype.multiplyScalar = function (scalar) {
+	this.x *= scalar;
+	this.y *= scalar;
 	return this;
 };
 
