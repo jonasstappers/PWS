@@ -1,27 +1,31 @@
-var G = 1;
+var G = 4;
 
 var dwarf = {
-	element: document.querySelector("#m"),
-	mass: 1,
-	velocity: new Vector(1, 0),
+	element: document.getElementById("m"),
+	mass: 4,
+	velocity: new Vector(1, 1),
 	acceleration: new Vector(0, 0),
 	position: new Vector(-420, -20)
 };
 
 var planet = {
-	element: document.querySelector("#M"),
-	mass: 20,
+	element: document.getElementById("m"),
+	mass: 30,
 	position: new Vector(-40, -40)
 };
 
 function calc (){
 	var force = planet.position.subtract(dwarf.position);
+	
 	var distance = force.magnitude();
+	console.log(force);
 	force.normalize();
+
 	var gravForce = (G * dwarf.mass * planet.mass)/(distance * distance);
 	force.multiplyScalar(gravForce);
 
 	var a = force.divideScalar(dwarf.mass);
+
 	dwarf.acceleration.add(a);
 	dwarf.velocity.add(dwarf.acceleration);
 	dwarf.position.add(dwarf.velocity);
@@ -29,8 +33,8 @@ function calc (){
 }
 
 function draw (){
-	//elem.innerHTML = "Hello world";
-	//dwarf.element.style.marginTop = dwarf.position.y;
+	dwarf.element.style.marginLeft = dwarf.position.x + "px";
+	dwarf.element.style.marginTop = dwarf.position.y + "px";
 }
 
 function mainLoop(){
@@ -64,11 +68,11 @@ Vector.prototype.magnitude = function() {
 Vector.prototype.normalize = function() {
 	var magnitude = this.magnitude();
 
-	if (length === 0){
+	if (magnitude === 0){
 		this.x = 1;
 		this.y = 0;
 	} else {
-		this.divide(new Vector(length, length))
+		this.divide(new Vector(magnitude, magnitude))
 	}
 	return this;
 };
@@ -122,8 +126,13 @@ Vector.prototype.divide = function (vec) {
 };
 
 Vector.prototype.divideScalar = function (scalar) {
-	this.x /= scalar;
-	this.y /= scalar;
+	if (scalar !== 0) {
+		this.x /= scalar;
+		this.y /= scalar;
+	} else {
+		this.x = 0;
+		this.y = 0;
+	}
 	return this;
 };
 
