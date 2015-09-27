@@ -44,3 +44,23 @@ img {
     margin-top:-20px;
     margin-left:-420px;
 }
+
+input {
+    height:200px;
+    width:500px;
+    border-radius: 20px;
+    background-color:#7E8890;
+    border: white solid 0px; 
+    font-family: 'Open Sans' sans-serif;
+    font-size: 5em;
+}
+
+input:focus {
+    height:200px;
+    width:500px;
+    border-radius: 20px;
+    background-color:#ffffff;
+    border: white solid 0px; 
+    font-family: 'Open Sans' sans-serif;
+    font-size: 5em;
+}
