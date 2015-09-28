@@ -45,22 +45,45 @@ img {
     margin-left:-420px;
 }
 
-input {
-    height:200px;
-    width:500px;
-    border-radius: 20px;
-    background-color:#7E8890;
-    border: white solid 0px; 
-    font-family: 'Open Sans' sans-serif;
-    font-size: 5em;
+#controlpanel {
+    position:absolute;
+    Width:250px;
+    float:right;
+    top:50%;
+    left:100%;
+    margin-left:-250px;
+    margin-top:-140px;
 }
 
-input:focus {
-    height:200px;
-    width:500px;
-    border-radius: 20px;
-    background-color:#ffffff;
-    border: white solid 0px; 
+#controlname {
+    font-family: 'Open Sans' ,sans-serif;
+    color: #ECF0F1;
+    font-size:20px;
+    font-weight:300;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+input {
+    height:35px;
+    width:200px;
+    border-radius: 15px;
+    background-color:#2C3A49 ;
+    border: solid #ECF0F1 2px;
     font-family: 'Open Sans' sans-serif;
-    font-size: 5em;
+    font-size: 20px;
+    color:#ECF0F1;
+    margin-bottom: 25px;
+    transition: background-color 0.5s;
+    -webkit-transition: background-color 0.5s;
+}
+
+
+input:focus {
+    height:35px;
+    width:200px;
+    border-radius: 15px;
+    background-color:#3F4B57 ;
+    border: #ECF0F1 solid 2px; 
+    font-family: 'Open Sans' sans-serif;
+    font-size: 20px;
 }
