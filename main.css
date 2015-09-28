@@ -82,8 +82,8 @@ input:focus {
     height:35px;
     width:200px;
     border-radius: 15px;
-    background-color:#3F4B57 ;
-    border: #ECF0F1 solid 2px; 
+    background-color:#3F4B57 ; 
     font-family: 'Open Sans' sans-serif;
     font-size: 20px;
+    outline: none;
 }
