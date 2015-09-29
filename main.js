@@ -4,6 +4,8 @@ var massDwarf = document.getElementById("Massdwarf");
 var gravConst = document.getElementById("Gravconst");
 
 var G = gravConst.value;
+var dt = 2;
+var t = 0;
 
 var dwarf = {
 	element: document.getElementById("m"),
