@@ -1,16 +1,21 @@
-var G = 4;
+var beginSpeed = document.getElementById("Beginspeed");
+var massPlanet = document.getElementById("Massplanet");
+var massDwarf = document.getElementById("Massdwarf");
+var gravConst = document.getElementById("Gravconst");
+
+var G = gravConst.value;
 
 var dwarf = {
 	element: document.getElementById("m"),
-	mass: 4,
-	velocity: new Vector(1, 1),
+	mass: massDwarf.value,
+	velocity: new Vector(0, -beginSpeed.value),
 	acceleration: new Vector(0, 0),
-	position: new Vector(-420, -20)
+	position: new Vector(420, 100)
 };
 
 var planet = {
 	element: document.getElementById("m"),
-	mass: 30,
+	mass: massPlanet.value,
 	position: new Vector(-40, -40)
 };
 

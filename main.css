@@ -67,7 +67,8 @@ input {
     height:35px;
     width:200px;
     border-radius: 15px;
-    background-color:#2C3A49 ;
+    /*background-color:#2C3A49 ;*/
+    background: transparent;
     border: solid #ECF0F1 2px;
     font-family: 'Open Sans' sans-serif;
     font-size: 20px;
