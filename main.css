@@ -63,6 +63,7 @@ img {
     text-decoration: none;
     margin-bottom: 5px;
 }
+
 input {
     height:35px;
     width:200px;
@@ -77,7 +78,6 @@ input {
     -webkit-transition: background-color 0.5s;
 }
 
-
 input:focus {
     height:35px;
     width:200px;
@@ -87,3 +87,44 @@ input:focus {
     font-size: 20px;
     outline: none;
 }
+
+button {
+    height:35px;
+    width:200px;
+    border-radius: 15px;
+    background:transparent;
+    border: solid #ECF0F1 2px;
+    font-family: 'Open Sans' sans-serif;
+    font-size: 20px;
+    color:#ECF0F1;
+    margin-bottom: 25px;
+    transition: background-color 0.5s;
+    -webkit-transition: background-color 0.5s;
+}
+
+button:hover {
+    height:35px;
+    width:200px;
+    border-radius: 15px;
+    background-color:#3F4B57 ; 
+    font-family: 'Open Sans' sans-serif;
+    font-size: 20px;
+    outline: none;
+}
+
+button:active {
+    height:35px;
+    width:200px;
+    border-radius: 15px;
+    background-color:#3f3f57 ; 
+    font-family: 'Open Sans' sans-serif;
+    font-size: 20px;
+    outline: none;
+}
+
+button:focus {
+    outline:0;
+}
+
+
+

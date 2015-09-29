@@ -2,24 +2,44 @@ var beginSpeed = document.getElementById("Beginspeed");
 var massPlanet = document.getElementById("Massplanet");
 var massDwarf = document.getElementById("Massdwarf");
 var gravConst = document.getElementById("Gravconst");
+var setValue = document.getElementById("Set");
 
-var G = gravConst.value;
+var G;
 var dt = 2;
 var t = 0;
 
-var dwarf = {
-	element: document.getElementById("m"),
-	mass: massDwarf.value,
-	velocity: new Vector(0, -beginSpeed.value),
-	acceleration: new Vector(0, 0),
-	position: new Vector(420, 100)
-};
+var dwarf;
+var planet;
 
-var planet = {
-	element: document.getElementById("m"),
-	mass: massPlanet.value,
-	position: new Vector(-40, -40)
-};
+setValue.addEventListener("click", setup);
+
+setup();
+
+function setup (){
+	dwarf = {
+		element: document.getElementById("m"),
+		mass: massDwarf.value,
+		velocity: new Vector(0, -beginSpeed.value),
+		acceleration: new Vector(0, 0),
+		position: new Vector(410, 10)
+	};
+
+	planet = {
+		element: document.getElementById("m"),
+		mass: massPlanet.value,
+		position: new Vector(-40, -40)
+	};
+
+	G = gravConst.value;
+}
+
+function mainLoop(){
+	calc();
+	draw();
+	requestAnimationFrame(mainLoop);
+}
+
+requestAnimationFrame(mainLoop);
 
 function calc (){
 	var force = planet.position.subtract(dwarf.position);
@@ -43,16 +63,6 @@ function draw (){
 	dwarf.element.style.marginLeft = dwarf.position.x + "px";
 	dwarf.element.style.marginTop = dwarf.position.y + "px";
 }
-
-function mainLoop(){
-	calc();
-	draw();
-	requestAnimationFrame(mainLoop);
-}
-
-requestAnimationFrame(mainLoop);
-
-
 
 function Vector (x, y) {
     if (!(this instanceof Vector)){
