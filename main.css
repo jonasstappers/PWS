@@ -47,12 +47,12 @@ img {
 
 #controlpanel {
     position:absolute;
-    Width:250px;
+    width:250px;
     float:right;
     top:50%;
     left:100%;
     margin-left:-250px;
-    margin-top:-140px;
+    margin-top:-150px;
 }
 
 #controlname {
