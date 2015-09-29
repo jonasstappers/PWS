@@ -12,7 +12,7 @@ var dwarf = {
 	mass: massDwarf.value,
 	velocity: new Vector(0, -beginSpeed.value),
 	acceleration: new Vector(0, 0),
-	position: new Vector(420, 100)
+	position: new Vector(410, 10)
 };
 
 var planet = {
