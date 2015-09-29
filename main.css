@@ -38,11 +38,11 @@ img {
     top:50%;
     left:50%;
     background-color:#1BA39C;
-    width:40px;
-    height:40px;
+    width:20px;
+    height:20px;
     border-radius: 50%;
-    margin-top:-20px;
-    margin-left:-420px;
+    margin-top:-10px;
+    margin-left:-410px;
 }
 
 #controlpanel {
@@ -68,7 +68,6 @@ input {
     width:200px;
     border-radius: 15px;
     /*background-color:#2C3A49 ;*/
-    background: transparent;
     border: solid #ECF0F1 2px;
     font-family: 'Open Sans' sans-serif;
     font-size: 20px;
