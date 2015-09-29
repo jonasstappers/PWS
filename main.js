@@ -67,7 +67,7 @@ Vector.prototype.zero = function(vec) {
 };
 
 Vector.prototype.magnitude = function() {
-	return Math.sqrt(this.x * this.x + this.y + this.y);
+	return Math.sqrt(this.x * this.x + this.y * this.y);
 };
 
 Vector.prototype.normalize = function() {
