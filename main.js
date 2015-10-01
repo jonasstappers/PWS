@@ -87,8 +87,8 @@ function Draw (){
 function OrbitTrail(){
     var trailDot = document.createElement("div");
     trailDot.id = "Dot"; 
-    var dotX = dwarf.position.x + 10;
-    var dotY = dwarf.position.y + 10;
+    var dotX = dwarf.position.x ;
+    var dotY = dwarf.position.y ;
     trailDot.style.marginLeft = dotX + "px";
     trailDot.style.marginTop = dotY + "px";
     trail.appendChild(trailDot);
