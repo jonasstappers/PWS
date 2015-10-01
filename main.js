@@ -18,12 +18,6 @@ var planet;
 setValue.addEventListener("click", setup);
 deleteTrail.addEventListener("click", ResetTrail);
 
-
-function ResetTrail (){
-    var elem = document.getElementById("trail")
-    while (elem.firstChild) elem.removeChild (elem.firstChild);
-}
-
 setup();
 
 function setup (){
@@ -97,11 +91,19 @@ function Draw (){
 function OrbitTrail(){
     var trailDot = document.createElement("div");
     trailDot.id = "Dot"; 
-    var dotX = dwarf.position.x ;
-    var dotY = dwarf.position.y ;
-    trailDot.style.marginLeft = dotX + "px";
-    trailDot.style.marginTop = dotY + "px";
+
+    trailDot.style.marginLeft = dwarf.position.x + "px";
+    trailDot.style.marginTop = dwarf.position.y + "px";
+    
     trail.appendChild(trailDot);
+}
+
+function ResetTrail (){
+    var elem = document.getElementById("trail")
+
+    while (elem.firstChild){
+    	elem.removeChild(elem.firstChild);
+    }
 }
 
 function Vector (x, y) {
