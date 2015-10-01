@@ -116,7 +116,7 @@ input {
     height: 30px;
     margin-bottom: 40px;
     font-family: 'Open Sans', sans-serif;
-    font-size:16px;
+    font-size:18px;
     font-weight: 200;
     color:#ECF0F1; 
     transition: all 0.5s;
@@ -145,9 +145,16 @@ button {
     color: #ECF0F1;
     border-radius:1px;
     transition: all 0.5s; 
+    margin-bottom: 20px;
 }
 
 button:hover {
+    background-color:#478883;
+    border: solid #478883 2px;
+    cursor: pointer;
+}
+
+button:active {
     background-color:#478883;
     border: solid #478883 2px;
     cursor: pointer;

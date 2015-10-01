@@ -5,6 +5,8 @@ var gravConst = document.getElementById("Gravconst");
 var xRadius = document.getElementById("Radius");
 var setValue = document.getElementById("Set");
 var trail = document.getElementById("trail");
+var deleteTrail = document.getElementById("deletetrail");
+
 
 var G;
 var dt = 1;
@@ -14,6 +16,13 @@ var dwarf;
 var planet;
 
 setValue.addEventListener("click", setup);
+deleteTrail.addEventListener("click", ResetTrail);
+
+
+function ResetTrail (){
+    var elem = document.getElementById("trail")
+    while (elem.firstChild) elem.removeChild (elem.firstChild);
+}
 
 setup();
 
