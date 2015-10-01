@@ -6,7 +6,7 @@ var setValue = document.getElementById("Set");
 var trail = document.getElementById("trail");
 
 var G;
-var dt = 2;
+var dt = 1;
 var t = 0;
 
 var dwarf;
@@ -26,8 +26,10 @@ function setup (){
 	};
 
 	planet = {
-		element: document.getElementById("m"),
+		element: document.getElementById("M"),
 		mass: massPlanet.value,
+		velocity: new Vector(0, 0),
+		acceleration: new Vector(0, 0),
 		position: new Vector(-40, -40)
 	};
 
@@ -35,43 +37,60 @@ function setup (){
 }
 
 function mainLoop(){
-	calc();
-	draw();
+	Calc();
+	Draw();
 	requestAnimationFrame(mainLoop);
 }
 
 requestAnimationFrame(mainLoop);
 
-function calc (){
-	var force = planet.position.subtract(dwarf.position);
+function Calc (){
+	t += dt;
+
+	var forceDwarf = planet.position.subtract(dwarf.position);
 	
-	var distance = force.magnitude();
-	console.log(force);
-	force.normalize();
+	var distance = forceDwarf.magnitude();
+	forceDwarf.normalize();
 
-	var gravForce = (G * dwarf.mass * planet.mass)/(distance * distance);
-	force.multiplyScalar(gravForce);
+	var forcePlanet = new Vector(forceDwarf.x * -1, forceDwarf.y * -1);
 
-	var a = force.divideScalar(dwarf.mass);
+	var gravforce = (G * dwarf.mass * planet.mass)/(distance * distance);
+	forceDwarf.multiplyScalar(gravforce);
+	forcePlanet.multiplyScalar(gravforce);
 
-	dwarf.acceleration.add(a);
+	var aDwarf = forceDwarf.divideScalar(dwarf.mass);
+	var aPlanet = forcePlanet.divideScalar(planet.mass);
+
+	dwarf.acceleration.add(aDwarf);
 	dwarf.velocity.add(dwarf.acceleration);
 	dwarf.position.add(dwarf.velocity);
 	dwarf.acceleration.zero();
+
+	planet.acceleration.add(aPlanet);
+	planet.velocity.add(planet.acceleration);
+	planet.position.add(planet.velocity);
+	planet.acceleration.zero();
 }
 
-function draw (){
+function Draw (){
 	dwarf.element.style.marginLeft = dwarf.position.x + "px";
 	dwarf.element.style.marginTop = dwarf.position.y + "px";
-    
-    OrbitTrail();
+
+	planet.element.style.marginLeft = planet.position.x + "px";
+	planet.element.style.marginTop = planet.position.y + "px";
+
+    if (t % 10 == 0){
+    	OrbitTrail();
+    }
 }
 
 function OrbitTrail(){
     var trailDot = document.createElement("div");
     trailDot.id = "Dot"; 
-    trailDot.style.marginLeft = dwarf.position.x + "px";
-    trailDot.style.marginTop = dwarf.position.y + "px";
+    var dotX = dwarf.position.x + 10;
+    var dotY = dwarf.position.y + 10;
+    trailDot.style.marginLeft = dotX + "px";
+    trailDot.style.marginTop = dotY + "px";
     trail.appendChild(trailDot);
 }
 
