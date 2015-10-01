@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+.center-anchor {
+    -webkit-transform: translate(-50% , -50%);
+}
+
 html {
     height: 100%;   
 }
@@ -26,12 +30,18 @@ img {
     z-index: 100;
 }
 
+/*
+#objects {
+    position:absolute;
+    top:50%;
+    left:50%;
+}
+*/
+
 #M {
     position:absolute;
     top:50%;
     left:50%;
-    margin-top:-40px;
-    margin-left:-40px;
     height:80px;
     width:80px;
     background-color:#F4B350  ;
@@ -47,8 +57,7 @@ img {
     width:20px;
     height:20px;
     border-radius: 50%;
-    margin-top:-10px;
-    margin-left:-410px;
+    margin-left:-400px;
     z-index: -1;
 }
 
