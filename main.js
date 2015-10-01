@@ -79,7 +79,7 @@ function Draw (){
 	planet.element.style.marginLeft = planet.position.x + "px";
 	planet.element.style.marginTop = planet.position.y + "px";
 
-    if (t % 10 == 0){
+    if (t % 10 === 0){
     	OrbitTrail();
     }
 }
@@ -101,9 +101,9 @@ function Vector (x, y) {
     
     this.x = x || 0;
     this.y = y || 0;
-};
+}
 
-Vector.prototype.zero = function(vec) {
+Vector.prototype.zero = function() {
 	this.x = this.y = 0;
 	return this;
 };
@@ -119,7 +119,7 @@ Vector.prototype.normalize = function() {
 		this.x = 1;
 		this.y = 0;
 	} else {
-		this.divide(new Vector(magnitude, magnitude))
+		this.divide(new Vector(magnitude, magnitude);
 	}
 	return this;
 };
