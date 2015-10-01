@@ -119,7 +119,7 @@ Vector.prototype.normalize = function() {
 		this.x = 1;
 		this.y = 0;
 	} else {
-		this.divide(new Vector(magnitude, magnitude);
+		this.divide(new Vector(magnitude, magnitude));
 	}
 	return this;
 };
