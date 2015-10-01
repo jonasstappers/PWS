@@ -79,7 +79,7 @@ function Draw (){
 	planet.element.style.marginLeft = planet.position.x + "px";
 	planet.element.style.marginTop = planet.position.y + "px";
 
-    if (t % 10 === 0){
+    if (t % 5 === 0){
     	OrbitTrail();
     }
 }
