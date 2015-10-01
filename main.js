@@ -3,6 +3,7 @@ var massPlanet = document.getElementById("Massplanet");
 var massDwarf = document.getElementById("Massdwarf");
 var gravConst = document.getElementById("Gravconst");
 var setValue = document.getElementById("Set");
+var trail = document.getElementById("trail");
 
 var G;
 var dt = 2;
@@ -62,6 +63,16 @@ function calc (){
 function draw (){
 	dwarf.element.style.marginLeft = dwarf.position.x + "px";
 	dwarf.element.style.marginTop = dwarf.position.y + "px";
+    
+    OrbitTrail();
+}
+
+function OrbitTrail(){
+    var trailDot = document.createElement("div");
+    trailDot.id = "Dot"; 
+    trailDot.style.marginLeft = dwarf.position.x + "px";
+    trailDot.style.marginTop = dwarf.position.y + "px";
+    trail.appendChild(trailDot);
 }
 
 function Vector (x, y) {
