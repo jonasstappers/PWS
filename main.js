@@ -56,8 +56,7 @@ function Calc (){
 	var distance = forceDwarf.magnitude();
 	forceDwarf.normalize();
 
-	var forcePlanet = dwarf.position.subtract(planet.position);
-	forcePlanet.normalize();
+	var forcePlanet = new Vector(forceDwarf.x * -1, forceDwarf.y * -1);
 
 	var gravforce = (G * dwarf.mass * planet.mass)/(distance * distance);
 	forceDwarf.multiplyScalar(gravforce);
