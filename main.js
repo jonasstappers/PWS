@@ -53,19 +53,20 @@ requestAnimationFrame(mainLoop);
 function Calc (){
 	t += dt;
 
-	var forceDwarf = planet.position.subtract(dwarf.position);
+	var forceDwarf = planet.position.clone().subtract(dwarf.position);
 	
-	var distance = forceDwarf.magnitude();
+	var distance = forceDwarf.clone().magnitude();
 	forceDwarf.normalize();
 
-	var forcePlanet = new Vector(forceDwarf.x * -1, forceDwarf.y * -1);
+	var forcePlanet = dwarf.position.clone().subtract(planet.position);
+	forcePlanet.normalize();
 
 	var gravforce = (G * dwarf.mass * planet.mass)/(distance * distance);
 	forceDwarf.multiplyScalar(gravforce);
 	forcePlanet.multiplyScalar(gravforce);
 
-	var aDwarf = forceDwarf.divideScalar(dwarf.mass);
-	var aPlanet = forcePlanet.divideScalar(planet.mass);
+	var aDwarf = forceDwarf.clone().divideScalar(dwarf.mass);
+	var aPlanet = forcePlanet.clone().divideScalar(planet.mass);
 
 	dwarf.acceleration.add(aDwarf);
 	dwarf.velocity.add(dwarf.acceleration);
@@ -123,6 +124,10 @@ function Vector (x, y) {
     this.x = x || 0;
     this.y = y || 0;
 }
+
+Vector.prototype.clone = function() {
+	return new Vector(this.x, this.y);
+};
 
 Vector.prototype.zero = function() {
 	this.x = this.y = 0;
@@ -225,3 +230,5 @@ Vector.prototype.multiplyScalar = function (scalar) {
 	this.y *= scalar;
 	return this;
 };
+
+
