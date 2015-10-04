@@ -6,6 +6,7 @@ var xRadius = document.getElementById("Radius");
 var setValue = document.getElementById("Set");
 var trail = document.getElementById("trail");
 var deleteTrail = document.getElementById("deletetrail");
+var background = document.getElementById("background");
 var trailColor = "#1BA39C";
 var trailColors = ["#2781A3","#6EA327","#6D27A3 ","#A32761 ","#A35827 ","#A32727","#273FA3","#27A36B",]
 
@@ -19,6 +20,18 @@ var planet;
 setValue.addEventListener("click", setup);
 setValue.addEventListener("click", ChangeColor);
 deleteTrail.addEventListener("click", ResetTrail);
+background.addEventListener("click", ToggleGrid);
+
+function ToggleGrid (){
+    console.log(background);
+    var toggleGrid = document.getElementById("background");
+    if (toggleGrid.style.display == 'block') {
+        toggleGrid.style.display = 'none';   
+    }
+    else {
+        toggleGrid.style.display = 'block';   
+    }
+}
 
 setup();
 
@@ -90,6 +103,8 @@ function Draw (){
     	OrbitTrail();
     }
 }
+
+
 
 function ChangeColor (){
     var randomColor = trailColors[Math.floor(Math.random() * trailColors.length)];
