@@ -10,7 +10,7 @@
 
 @font-face {
     font-family:Moon; 
-    src: url('Moon Light.otf');
+    src: url('assets/Moon Light.otf');
 }
 
 html {
@@ -28,7 +28,7 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    background-image: url(grid.png);
+    background-image: url(assets/img/grid.png);
     background-position: center;
     background-repeat: repeat;
     opacity: 0.1;
