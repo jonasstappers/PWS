@@ -22,17 +22,6 @@ setValue.addEventListener("click", ChangeColor);
 deleteTrail.addEventListener("click", ResetTrail);
 background.addEventListener("click", ToggleGrid);
 
-function ToggleGrid (){
-    console.log(background);
-    var toggleGrid = document.getElementById("background");
-    if (toggleGrid.style.display == 'block') {
-        toggleGrid.style.display = 'none';   
-    }
-    else {
-        toggleGrid.style.display = 'block';   
-    }
-}
-
 setup();
 
 function setup (){
@@ -104,7 +93,16 @@ function Draw (){
     }
 }
 
-
+function ToggleGrid (){
+    console.log(background);
+    var toggleGrid = document.getElementById("background");
+    if (toggleGrid.style.display == 'block') {
+        toggleGrid.style.display = 'none';   
+    }
+    else {
+        toggleGrid.style.display = 'block';   
+    }
+}
 
 function ChangeColor (){
     var randomColor = trailColors[Math.floor(Math.random() * trailColors.length)];
