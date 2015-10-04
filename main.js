@@ -6,7 +6,8 @@ var xRadius = document.getElementById("Radius");
 var setValue = document.getElementById("Set");
 var trail = document.getElementById("trail");
 var deleteTrail = document.getElementById("deletetrail");
-
+var trailColor = "#1BA39C";
+var trailColors = ["#2781A3","#6EA327","#6D27A3 ","#A32761 ","#A35827 ","#A32727","#273FA3","#27A36B",]
 
 var G;
 var dt = 1;
@@ -16,6 +17,7 @@ var dwarf;
 var planet;
 
 setValue.addEventListener("click", setup);
+setValue.addEventListener("click", ChangeColor);
 deleteTrail.addEventListener("click", ResetTrail);
 
 setup();
@@ -88,12 +90,19 @@ function Draw (){
     }
 }
 
+function ChangeColor (){
+    var randomColor = trailColors[Math.floor(Math.random() * trailColors.length)];
+    trailColor = randomColor;
+    document.getElementById("m").style.backgroundColor = randomColor;
+}
+
 function OrbitTrail(){
     var trailDot = document.createElement("div");
     trailDot.id = "Dot"; 
 
     trailDot.style.marginLeft = dwarf.position.x + "px";
     trailDot.style.marginTop = dwarf.position.y + "px";
+    trailDot.style.backgroundColor = trailColor;
     
     trail.appendChild(trailDot);
 }
