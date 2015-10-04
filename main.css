@@ -22,10 +22,6 @@ body {
     background-color: #2C3A49;
 }
 
-#background {
-    display:block;   
-}
-
 #backgroundimage {
     position: absolute;
     top: 0;

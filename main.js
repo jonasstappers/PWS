@@ -6,7 +6,7 @@ var xRadius = document.getElementById("Radius");
 var setValue = document.getElementById("Set");
 var trail = document.getElementById("trail");
 var deleteTrail = document.getElementById("deletetrail");
-var background = document.getElementById("background");
+var background = document.getElementById("gridtoggle");
 var trailColor = "#1BA39C";
 var trailColors = ["#2781A3","#6EA327","#6D27A3 ","#A32761 ","#A35827 ","#A32727","#273FA3","#27A36B",]
 
@@ -93,14 +93,13 @@ function Draw (){
     }
 }
 
-function ToggleGrid (){
-    console.log(background);
+function ToggleGrid(){
     var toggleGrid = document.getElementById("background");
-    if (toggleGrid.style.display == 'block') {
-        toggleGrid.style.display = 'none';   
-    }
-    else {
-        toggleGrid.style.display = 'block';   
+    
+    if (toggleGrid.style.display == "block") {
+        toggleGrid.style.display = "none";   
+    } else {
+        toggleGrid.style.display = "block";   
     }
 }
 
