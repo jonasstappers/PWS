@@ -26,8 +26,9 @@ background.addEventListener("click", ToggleGrid);
 
 setup();
 
+
 function setup (){
-    sVar = parseInt(radius.value);
+    sVar = Number(radius.value);
     scale = 400 / sVar;
     
 	dwarf = {
