@@ -3,7 +3,7 @@ var vPlanet = document.getElementById("vPlanet");
 var massPlanet = document.getElementById("Massplanet");
 var massDwarf = document.getElementById("Massdwarf");
 var gravConst = document.getElementById("Gravconst");
-var xRadius = document.getElementById("Radius");
+var radius = document.getElementById("Radius");
 var setValue = document.getElementById("Set");
 var trail = document.getElementById("trail");
 var deleteTrail = document.getElementById("deletetrail");
@@ -14,6 +14,7 @@ var trailColors = ["#2781A3","#6EA327","#6D27A3 ","#A32761 ","#A35827 ","#A32727
 var G;
 var dt = 1;
 var t = 0;
+var scale;
 
 var dwarf;
 var planet;
@@ -26,12 +27,15 @@ background.addEventListener("click", ToggleGrid);
 setup();
 
 function setup (){
+    sVar = parseInt(radius.value);
+    scale = 400 / sVar;
+    
 	dwarf = {
 		element: document.getElementById("m"),
 		mass: massDwarf.value,
 		velocity: new Vector(0, -vDwarf.value),
 		acceleration: new Vector(0, 0),
-		position: new Vector(400, 0)
+		position: new Vector(sVar, 0)
 	};
 
 	planet = {
@@ -41,7 +45,7 @@ function setup (){
 		acceleration: new Vector(0, 0),
 		position: new Vector(0, 0)
 	};
-
+    
 	G = gravConst.value;
 }
 
@@ -55,7 +59,7 @@ requestAnimationFrame(mainLoop);
 
 function Calc (){
 	t += dt;
-
+    
 	var forceDwarf = planet.position.clone().subtract(dwarf.position);
 	
 	var distance = forceDwarf.clone().magnitude();
@@ -83,11 +87,11 @@ function Calc (){
 }
 
 function Draw (){
-	dwarf.element.style.marginLeft = dwarf.position.x + "px";
-	dwarf.element.style.marginTop = dwarf.position.y + "px";
+	dwarf.element.style.marginLeft = (dwarf.position.x * scale) + "px";
+	dwarf.element.style.marginTop = (dwarf.position.y * scale) + "px";
 
-	planet.element.style.marginLeft = planet.position.x + "px";
-	planet.element.style.marginTop = planet.position.y + "px";
+	planet.element.style.marginLeft = (planet.position.x * scale) + "px";
+	planet.element.style.marginTop = (planet.position.y * scale) + "px";
 
     if (t % 5 === 0){
     	OrbitTrail();
@@ -114,8 +118,8 @@ function OrbitTrail(){
     var trailDot = document.createElement("div");
     trailDot.id = "Dot"; 
 
-    trailDot.style.marginLeft = dwarf.position.x + "px";
-    trailDot.style.marginTop = dwarf.position.y + "px";
+    trailDot.style.marginLeft = (dwarf.position.x * scale) + "px";
+    trailDot.style.marginTop = (dwarf.position.y * scale) + "px";
     trailDot.style.backgroundColor = trailColor;
     
     trail.appendChild(trailDot);

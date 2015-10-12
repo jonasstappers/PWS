@@ -131,7 +131,8 @@ img {
     left:100%;
     margin-left: -200px;
     height: 100%;
-    background: rgba(99,109,121,0.4)
+    background: rgba(99,109,121,0.4);
+    overflow: auto;
     
 }
 
