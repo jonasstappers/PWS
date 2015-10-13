@@ -82,8 +82,25 @@ img {
     margin-top:2%;
     max-width:600px;
     z-index: 100;
+    opacity: 1;
+    animation: fadeImg 4s 5s forwards;
+    -webkit-animation: fadeImg 4s 5s forwards;
 }
-
+@keyframes fadeImg {
+    to {
+        opacity: 0;
+    }   
+}
+@-webkit-keyframes fadeImg {
+    to {
+        opacity: 0;
+    }   
+}
+@-moz-keyframes fadeImg {
+    to {
+        opacity: 0;
+    }   
+}
 /*
 #objects {
     position:absolute;
