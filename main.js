@@ -9,6 +9,14 @@ var setValue = document.getElementById("Set");
 var trail = document.getElementById("trail");
 var deleteTrail = document.getElementById("deletetrail");
 var background = document.getElementById("gridtoggle");
+var x1 = document.getElementById("scalevalue_x1");
+var x2 = document.getElementById("scalevalue_x2");
+var xMin1 = document.getElementById("scalevalue_x-1");
+var xMin2 = document.getElementById("scalevalue_x-2");
+var y1 = document.getElementById("scalevalue_y1");
+var y2 = document.getElementById("scalevalue_y2");
+var yMin1 = document.getElementById("scalevalue_y-1");
+var yMin2 = document.getElementById("scalevalue_y-2");
 var trailColor = "#1BA39C";
 var trailColors = ["#2781A3","#6EA327","#6D27A3 ","#A32761 ","#A35827 ","#A32727","#273FA3","#27A36B",]
 
@@ -50,6 +58,8 @@ function setup (){
     
 	G = gravConst.value;
 	dtScalar = deltaTime.value;
+    
+    ScaleValues();
 }
 
 function mainLoop(){
@@ -104,6 +114,17 @@ function Draw (){
 	if (i % 5 === 0){
 		OrbitTrail();
 	}
+}
+
+function ScaleValues (){
+    x2.innerHTML = Number(radius.value);
+    x1.innerHTML = Number(radius.value)/2;
+    xMin1.innerHTML = -(Number(radius.value)/2);
+    xMin2.innerHTML = -(Number(radius.value));
+    y2.innerHTML = Number(radius.value);
+    y1.innerHTML = Number(radius.value)/2;
+    yMin1.innerHTML = -(Number(radius.value)/2);
+    yMin2.innerHTML = -(Number(radius.value));
 }
 
 function ToggleGrid(){
