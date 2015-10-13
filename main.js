@@ -129,24 +129,24 @@ function ScaleValues (){
     yMin2.innerHTML = -(Number(radius.value));
 }
 
-function EarthSun() {
-    vDwarf = 29780;
-    radius = 1.4960E11;
-    massDwarf = 5.972E24;
-    massPlanet = 1.989E30;
-    gravConst = 6.67408E-11;
-    deltaTime = 1000;
-
-    setup();
-    console.log();
-    // vDwarf.innerHTML = 29780;
-    // radius.innerHTML = 1.4960E11;
-    // massDwarf.innerHTML = 5.972E24;
-    // massPlanet.innerHTML = 1.989E30;
-    // gravConst.innerHTML = 6.67408E-11;
-    // deltaTime.innerHTML = 1000;
-
-}
+// function EarthSun() {
+//     vDwarf = 29780;
+//     radius = 1.4960E11;
+//     massDwarf = 5.972E24;
+//     massPlanet = 1.989E30;
+//     gravConst = 6.67408E-11;
+//     deltaTime = 1000;
+//
+//     setup();
+//     console.log();
+//     // vDwarf.innerHTML = 29780;
+//     // radius.innerHTML = 1.4960E11;
+//     // massDwarf.innerHTML = 5.972E24;
+//     // massPlanet.innerHTML = 1.989E30;
+//     // gravConst.innerHTML = 6.67408E-11;
+//     // deltaTime.innerHTML = 1000;
+//
+// }
 
 function ToggleGrid(){
     var toggleGrid = document.getElementById("background");
