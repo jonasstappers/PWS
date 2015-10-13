@@ -15,6 +15,7 @@ var trailColors = ["#2781A3","#6EA327","#6D27A3 ","#A32761 ","#A35827 ","#A32727
 var G;
 var dt;
 var t;
+var i = 0;
 var scale;
 
 var dwarf;
@@ -97,8 +98,12 @@ function Draw (){
 
 	planet.element.style.marginLeft = (planet.position.x * scale) + "px";
 	planet.element.style.marginTop = (planet.position.y * scale) + "px";
-    
-    OrbitTrail();
+
+	i++;
+
+	if (i % 5 === 0){
+		OrbitTrail();
+	}
 }
 
 function ToggleGrid(){
