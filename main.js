@@ -4,6 +4,7 @@ var massPlanet = document.getElementById("Massplanet");
 var massDwarf = document.getElementById("Massdwarf");
 var gravConst = document.getElementById("Gravconst");
 var radius = document.getElementById("Radius");
+var deltaTime = document.getElementById("DeltaTime");
 var setValue = document.getElementById("Set");
 var trail = document.getElementById("trail");
 var deleteTrail = document.getElementById("deletetrail");
@@ -12,8 +13,8 @@ var trailColor = "#1BA39C";
 var trailColors = ["#2781A3","#6EA327","#6D27A3 ","#A32761 ","#A35827 ","#A32727","#273FA3","#27A36B",]
 
 var G;
-var dt = 1;
-var t = 0;
+var dt;
+var t;
 var scale;
 
 var dwarf;
@@ -25,7 +26,6 @@ deleteTrail.addEventListener("click", ResetTrail);
 background.addEventListener("click", ToggleGrid);
 
 setup();
-
 
 function setup (){
     sVar = Number(radius.value);
@@ -48,19 +48,23 @@ function setup (){
 	};
     
 	G = gravConst.value;
+	dtScalar = deltaTime.value;
 }
 
 function mainLoop(){
 	Calc();
 	Draw();
 	requestAnimationFrame(mainLoop);
+
+	var now = new Date().getTime();
+	dt = now - (t || now);
+	dt *= dtScalar;
+	t = now;
 }
 
 requestAnimationFrame(mainLoop);
 
 function Calc (){
-	t += dt;
-    
 	var forceDwarf = planet.position.clone().subtract(dwarf.position);
 	
 	var distance = forceDwarf.clone().magnitude();
@@ -77,13 +81,13 @@ function Calc (){
 	var aPlanet = forcePlanet.clone().divideScalar(planet.mass);
 
 	dwarf.acceleration.add(aDwarf);
-	dwarf.velocity.add(dwarf.acceleration);
-	dwarf.position.add(dwarf.velocity);
+	dwarf.velocity.add(dwarf.acceleration.clone().multiplyScalar(dt));
+	dwarf.position.add(dwarf.velocity.clone().multiplyScalar(dt));
 	dwarf.acceleration.zero();
 
 	planet.acceleration.add(aPlanet);
-	planet.velocity.add(planet.acceleration);
-	planet.position.add(planet.velocity);
+	planet.velocity.add(planet.acceleration.clone().multiplyScalar(dt));
+	planet.position.add(planet.velocity.clone().multiplyScalar(dt));
 	planet.acceleration.zero();
 }
 
@@ -93,10 +97,8 @@ function Draw (){
 
 	planet.element.style.marginLeft = (planet.position.x * scale) + "px";
 	planet.element.style.marginTop = (planet.position.y * scale) + "px";
-
-    if (t % 5 === 0){
-    	OrbitTrail();
-    }
+    
+    OrbitTrail();
 }
 
 function ToggleGrid(){
