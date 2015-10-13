@@ -34,7 +34,7 @@ setValue.addEventListener("click", setup);
 setValue.addEventListener("click", ChangeColor);
 deleteTrail.addEventListener("click", ResetTrail);
 background.addEventListener("click", ToggleGrid);
-earthSun.addEventListener("click", EarthSun);
+// earthSun.addEventListener("click", EarthSun);
 
 setup();
 
