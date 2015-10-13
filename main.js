@@ -17,6 +17,7 @@ var y1 = document.getElementById("scalevalue_y1");
 var y2 = document.getElementById("scalevalue_y2");
 var yMin1 = document.getElementById("scalevalue_y-1");
 var yMin2 = document.getElementById("scalevalue_y-2");
+var earthSun = document.getElementById("earth_sun");
 var trailColor = "#1BA39C";
 var trailColors = ["#2781A3","#6EA327","#6D27A3 ","#A32761 ","#A35827 ","#A32727","#273FA3","#27A36B",]
 
@@ -33,13 +34,14 @@ setValue.addEventListener("click", setup);
 setValue.addEventListener("click", ChangeColor);
 deleteTrail.addEventListener("click", ResetTrail);
 background.addEventListener("click", ToggleGrid);
+earthSun.addEventListener("click", EarthSun);
 
 setup();
 
 function setup (){
     sVar = Number(radius.value);
     scale = 400 / sVar;
-    
+
 	dwarf = {
 		element: document.getElementById("m"),
 		mass: massDwarf.value,
@@ -55,10 +57,10 @@ function setup (){
 		acceleration: new Vector(0, 0),
 		position: new Vector(0, 0)
 	};
-    
+
 	G = gravConst.value;
 	dtScalar = deltaTime.value;
-    
+
     ScaleValues();
 }
 
@@ -77,7 +79,7 @@ requestAnimationFrame(mainLoop);
 
 function Calc (){
 	var forceDwarf = planet.position.clone().subtract(dwarf.position);
-	
+
 	var distance = forceDwarf.clone().magnitude();
 	forceDwarf.normalize();
 
@@ -127,13 +129,32 @@ function ScaleValues (){
     yMin2.innerHTML = -(Number(radius.value));
 }
 
+function EarthSun() {
+    vDwarf = 29780;
+    radius = 1.4960E11;
+    massDwarf = 5.972E24;
+    massPlanet = 1.989E30;
+    gravConst = 6.67408E-11;
+    deltaTime = 1000;
+
+    setup();
+    console.log();
+    // vDwarf.innerHTML = 29780;
+    // radius.innerHTML = 1.4960E11;
+    // massDwarf.innerHTML = 5.972E24;
+    // massPlanet.innerHTML = 1.989E30;
+    // gravConst.innerHTML = 6.67408E-11;
+    // deltaTime.innerHTML = 1000;
+
+}
+
 function ToggleGrid(){
     var toggleGrid = document.getElementById("background");
-    
+
     if (toggleGrid.style.display == "block") {
-        toggleGrid.style.display = "none";   
+        toggleGrid.style.display = "none";
     } else {
-        toggleGrid.style.display = "block";   
+        toggleGrid.style.display = "block";
     }
 }
 
@@ -145,12 +166,12 @@ function ChangeColor (){
 
 function OrbitTrail(){
     var trailDot = document.createElement("div");
-    trailDot.id = "Dot"; 
+    trailDot.id = "Dot";
 
     trailDot.style.marginLeft = (dwarf.position.x * scale) + "px";
     trailDot.style.marginTop = (dwarf.position.y * scale) + "px";
     trailDot.style.backgroundColor = trailColor;
-    
+
     trail.appendChild(trailDot);
 }
 
@@ -166,7 +187,7 @@ function Vector (x, y) {
     if (!(this instanceof Vector)){
         return new Vector(x, y);
     }
-    
+
     this.x = x || 0;
     this.y = y || 0;
 }
@@ -276,5 +297,3 @@ Vector.prototype.multiplyScalar = function (scalar) {
 	this.y *= scalar;
 	return this;
 };
-
-

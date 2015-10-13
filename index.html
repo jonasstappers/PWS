@@ -9,7 +9,7 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600' rel='stylesheet' type='text/css'>
 </head>
 <body>
-    
+
     <header>
         <div id="Title">
             <img id="titleimg" src="assets/img/title.png">
@@ -29,78 +29,80 @@
         <div id="line_y-1" class="line-y center-anchor"></div>
         <div id="line_y1" class="line-y center-anchor"></div>
         <div id="line_y2" class="line-y center-anchor"></div>
-        
-        <div id="scalevalue_x-2" class="scale-value center-anchor">-400</div>
-        <div id="scalevalue_x-1"class="scale-value center-anchor">-200</div>
-        <div id="scalevalue_x1" class="scale-value center-anchor">200</div>
-        <div id="scalevalue_x2" class="scale-value center-anchor">400</div>
-        <div id="scalevalue_y-2" class="scale-value center-anchor">-400</div>
-        <div id="scalevalue_y-1" class="scale-value center-anchor">-200</div>
-        <div id="scalevalue_y1" class="scale-value center-anchor">200</div>
-        <div id="scalevalue_y2" class="scale-value center-anchor">400</div>
+
+        <div id="scalevalue_x-2" class="scale-value-x center-anchor">-400</div>
+        <div id="scalevalue_x-1"class="scale-value-x center-anchor">-200</div>
+        <div id="scalevalue_x1" class="scale-value-x center-anchor">200</div>
+        <div id="scalevalue_x2" class="scale-value-x center-anchor">400</div>
+        <div id="scalevalue_y-2" class="scale-value-y center-anchor">-400</div>
+        <div id="scalevalue_y-1" class="scale-value-y center-anchor">-200</div>
+        <div id="scalevalue_y1" class="scale-value-y center-anchor">200</div>
+        <div id="scalevalue_y2" class="scale-value-y center-anchor">400</div>
     </div>
     <div id="content">
-        <div id="objects">    
+        <div id="objects">
             <div id="M" class="center-anchor">
 
-            </div>  
+            </div>
             <div id="m" class="center-anchor">
 
             </div>
         </div>
         <div id="trail">
-        
+
         </div>
     </div>
-   
+
     <div id="controlpanel">
-      
+
         <div id="controls">
         <div id="name-input">
             <div id="controlname">Radius</div>
-            <input type="text" name="Radius" id="Radius" value="400" /> 
+            <input type="text" name="Radius" id="Radius" value="400" />
         </div>
         <div id="name-input">
             <div id="controlname">Time Scale</div>
-            <input type="text" name="DeltaTime" id="DeltaTime" value="0.1" /> 
+            <input type="text" name="DeltaTime" id="DeltaTime" value="0.1" />
         </div>
         <div id="name-input">
             <div id="controlname">V<sub>0</sub> Dwarf</div>
-            <input type="text" name="vDwarf" id="vDwarf" value="2" />   
+            <input type="text" name="vDwarf" id="vDwarf" value="2" />
         </div>
         <div id="name-input">
             <div id="controlname">V<sub>0</sub> Planet</div>
-            <input type="text" name="vPlanet" id="vPlanet" value="0" />   
+            <input type="text" name="vPlanet" id="vPlanet" value="0" />
         </div>
         <div id="name-input">
             <div id="controlname">Mass dwarf</div>
             <input type="text" name="Massdwarf" id="Massdwarf" value="4"/>
-        </div>    
+        </div>
         <div id="name-input">
             <div id="controlname">Mass planet</div>
-            <input type="text" name="Massplanet" id="Massplanet" value="200" />  
-        </div>   
+            <input type="text" name="Massplanet" id="Massplanet" value="200" />
+        </div>
         <div id="name-input">
             <div id="controlname">constant G</div>
-            <input type="text" name="Gravconst" id="Gravconst" value="10" /> 
+            <input type="text" name="Gravconst" id="Gravconst" value="10" />
         </div>
         <div id="buttons">
             <button name="Set" id="Set">Set Values</button>
             <button name="deletetrail" id="deletetrail">Delete Trail</button>
             <button name="gridtoggle" id="gridtoggle">Grid on/off</button>
-        </div>
+						<!-- <button name="earth_sun" id="earth_sun">Sun-Earth</button> -->
+				</div>
+
             <div id="controlpanelbackground">
 
             </div>
         </div>
     </div>
-    
-    <div id="dashboard">
+
+    <!-- <div id="dashboard">
         <div id="speedview">
         100 m/s
         </div>
-    </div>
-    
+    </div> -->
+
 
     <script src="main.js" type="text/javascript"></script>
 

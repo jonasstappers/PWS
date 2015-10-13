@@ -9,7 +9,7 @@
 }
 
 @font-face {
-    font-family:Moon; 
+    font-family:Moon;
     src: url('assets/Moon Light.otf');
 }
 
@@ -54,7 +54,7 @@ body {
     opacity: 0.6;
     z-index: -9;
     top:50%;
-    left:50%; 
+    left:50%;
 }
 .line-y {
     position: absolute;
@@ -64,7 +64,7 @@ body {
     opacity: 0.6;
     z-index: -9;
     top:50%;
-    left:50%; 
+    left:50%;
 }
 
 #line_x-2 {
@@ -92,19 +92,31 @@ body {
     margin-top: 400px;
 }
 
-.scale-value {
+.scale-value-x {
     position: absolute;
     top:50%;
     left:50%;
     font-family: 'Moon';
-    font-size: 14px;
-    opacity: 0.6;
+    font-size: 16px;
+    opacity: 0.8;
     z-index: -9;
     color: #ECF0F1;
     width: 100px;
     height: 30px;
     text-align: center;
-    
+}
+.scale-value-y {
+    position: absolute;
+    top:50%;
+    left:50%;
+    font-family: 'Moon';
+    font-size: 16px;
+    opacity: 0.8;
+    z-index: -9;
+    color: #ECF0F1;
+    width: 100px;
+    height: 30px;
+    text-align:left;
 }
 #scalevalue_x-2 {
     margin-left: -400px;
@@ -124,19 +136,19 @@ body {
 }
 #scalevalue_y-2 {
     margin-top: 406px;
-    margin-left: 35px;
+    margin-left: 70px;
 }
 #scalevalue_y-1 {
     margin-top: 206px;
-    margin-left: 35px;
+    margin-left: 70px;
 }
 #scalevalue_y1 {
     margin-top: -194px;
-    margin-left: 35px;
+    margin-left: 70px;
 }
 #scalevalue_y2 {
     margin-top: -394px;
-    margin-left: 35px;
+    margin-left: 70px;
 }
 
 header {
@@ -159,17 +171,17 @@ header {
 @keyframes fadeImg {
     to {
         opacity: 0;
-    }   
+    }
 }
 @-webkit-keyframes fadeImg {
     to {
         opacity: 0;
-    }   
+    }
 }
 @-moz-keyframes fadeImg {
     to {
         opacity: 0;
-    }   
+    }
 }
 #dashboard {
     position:fixed;
@@ -226,14 +238,14 @@ header {
 
 #controlpanel {
     width:200px;
-    position:fixed; 
+    position:fixed;
     top:0%;
     left:100%;
     margin-left: -200px;
     height: 100%;
     background: rgba(99,109,121,0.4);
     overflow: auto;
-    
+
 }
 
 #controls {
@@ -261,7 +273,7 @@ input {
     font-family: 'Moon';
     font-size:18px;
     font-weight: 200;
-    color:#ECF0F1; 
+    color:#ECF0F1;
     transition: all 0.5s;
 }
 
@@ -287,7 +299,7 @@ button {
     font-weight: 200;
     color: #ECF0F1;
     border-radius:1px;
-    transition: all 0.5s; 
+    transition: all 0.5s;
     margin-bottom: 15px;
 }
 
@@ -303,15 +315,38 @@ button:active {
     cursor: pointer;
 }
 
+#earth_sun {
+    width:100%;
+    height:40px;
+    outline: none;
+    border: solid #ECF0F1 2px;
+    background:transparent;
+    font-family: 'Moon';
+    font-size:18px;
+    font-weight: 200;
+    color: #ECF0F1;
+    border-radius:1px;
+    transition: all 0.5s;
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+#earth_sun:hover {
+    background-color:#1E8BC3;
+    border: solid #1E8BC3 2px;
+    cursor: pointer;
+}
+
+
+
 @media screen and (max-width: 1300px) {
     #controlpanel {
-        width:150px;  
+        width:150px;
         margin-left: -150px;
     }
 }
 
 @media screen and (max-width: 1000px) {
-    
+
     #controlpanel {
         width:100%;
         position:absolute;
@@ -321,15 +356,15 @@ button:active {
         margin-left: 0px;
         margin-top:-110px;
 
-        background: rgba(99,109,121,0.4)   
-    } 
-    
+        background: rgba(99,109,121,0.4)
+    }
+
     #name-input {
         float: left;
         width: 14.2857%;
         display: block;
     }
-    
+
     input {
         border: none;
         background: transparent;
@@ -341,11 +376,11 @@ button:active {
         font-family: 'Moon';
         font-size:16px;
         font-weight: 200;
-        color:#ECF0F1; 
+        color:#ECF0F1;
         transition: all 0.5s;
         float:left;
     }
-    
+
     #controlname {
         font-family: 'Moon';
         color: #ECF0F1;
@@ -355,19 +390,19 @@ button:active {
         text-decoration: none;
         margin-bottom: 0px;
     }
-    
+
     #controls {
         width:100%;
         margin:auto;
         margin-top:10px;
     }
-    
+
     #buttons {
         width:100%;
         height: 30px;
         float: left;
     }
-    
+
     button {
         position: static;
         width:31%;
@@ -380,7 +415,7 @@ button:active {
         font-weight: 200;
         color: #ECF0F1;
         border-radius:1px;
-        transition: all 0.5s; 
+        transition: all 0.5s;
         margin-top: 10px;
         margin-bottom: 0px;
         margin-right:0px;
@@ -388,6 +423,3 @@ button:active {
         float: left;
     }
 }
-
-
-
