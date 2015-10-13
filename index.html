@@ -8,19 +8,36 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600' rel='stylesheet' type='text/css'>
 </head>
 <body>
+    
+    <header>
+        <div id="Title">
+            <img id="titleimg" src="assets/img/title.png">
+        </div>
+    </header>
     <div id="background" style="display: none;">
         <div id="backgroundimage">
         </div>
         <img id="centerpoint" class="center-anchor" src="assets/img/centerpoint.png">
         <!--<div id="horizontal-line"></div>-->
         <!--<div id="vertical-line"></div>-->
+        <div id="line_x-2" class="line-x center-anchor"></div>
+        <div id="line_x-1" class="line-x center-anchor"></div>
+        <div id="line_x1" class="line-x center-anchor"></div>
+        <div id="line_x2" class="line-x center-anchor"></div>
+        <div id="line_y-2" class="line-y center-anchor"></div>
+        <div id="line_y-1" class="line-y center-anchor"></div>
+        <div id="line_y1" class="line-y center-anchor"></div>
+        <div id="line_y2" class="line-y center-anchor"></div>
+        
+        <div id="scalevalue_x-2" class="scale-value center-anchor">-400</div>
+        <div id="scalevalue_x-1"class="scale-value center-anchor">-200</div>
+        <div id="scalevalue_x1" class="scale-value center-anchor">200</div>
+        <div id="scalevalue_x2" class="scale-value center-anchor">400</div>
+        <div id="scalevalue_y-2" class="scale-value center-anchor">-400</div>
+        <div id="scalevalue_y-1" class="scale-value center-anchor">-200</div>
+        <div id="scalevalue_y1" class="scale-value center-anchor">200</div>
+        <div id="scalevalue_y2" class="scale-value center-anchor">400</div>
     </div>
-    <header>
-        <div id="Title">
-            <img src="assets/img/title.png">
-        </div>
-    </header>
-
     <div id="content">
         <div id="objects">    
             <div id="M" class="center-anchor">
@@ -44,7 +61,7 @@
         </div>
         <div id="name-input">
             <div id="controlname">Time Scale</div>
-            <input type="text" name="DeltaTime" id="DeltaTime" value="2" /> 
+            <input type="text" name="DeltaTime" id="DeltaTime" value="0.1" /> 
         </div>
         <div id="name-input">
             <div id="controlname">V<sub>0</sub> Dwarf</div>
