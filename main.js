@@ -34,7 +34,7 @@ setValue.addEventListener("click", setup);
 setValue.addEventListener("click", ChangeColor);
 deleteTrail.addEventListener("click", ResetTrail);
 background.addEventListener("click", ToggleGrid);
-// earthSun.addEventListener("click", EarthSun);
+earthSun.addEventListener("click", EarthSun);
 
 setup();
 
@@ -129,24 +129,16 @@ function ScaleValues (){
     yMin2.innerHTML = -(Number(radius.value));
 }
 
-// function EarthSun() {
-//     vDwarf = 29780;
-//     radius = 1.4960E11;
-//     massDwarf = 5.972E24;
-//     massPlanet = 1.989E30;
-//     gravConst = 6.67408E-11;
-//     deltaTime = 1000;
-//
-//     setup();
-//     console.log();
-//     // vDwarf.innerHTML = 29780;
-//     // radius.innerHTML = 1.4960E11;
-//     // massDwarf.innerHTML = 5.972E24;
-//     // massPlanet.innerHTML = 1.989E30;
-//     // gravConst.innerHTML = 6.67408E-11;
-//     // deltaTime.innerHTML = 1000;
-//
-// }
+function EarthSun() {
+    vDwarf.value = 29780;
+    radius.value = 1.4960e11;
+    massDwarf.value = 5.972e24;
+    massPlanet.value = 1.989e30;
+    gravConst.value = 6.67408e-11;
+    deltaTime.value = 1000;
+
+    setup();
+}
 
 function ToggleGrid(){
     var toggleGrid = document.getElementById("background");
