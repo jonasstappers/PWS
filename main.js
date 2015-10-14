@@ -19,7 +19,7 @@ var yMin1 = document.getElementById("scalevalue_y-1");
 var yMin2 = document.getElementById("scalevalue_y-2");
 var earthSun = document.getElementById("earth_sun");
 var trailColor = "#1BA39C";
-var trailColors = ["#2781A3","#6EA327","#6D27A3 ","#A32761 ","#A35827 ","#A32727","#273FA3","#27A36B",]
+var trailColors = ["#2781A3","#6EA327","#6D27A3 ","#CD518B ","#A35827 ","#F4B683","#3754CB","#27A36B","#6D27A3","#D2106A","#D1590B","#63C02A","#88F7C5","#78DEF6","#BADA64","#8078F5","#5DFBF6","#FEE1B6"]
 
 var G;
 var dt;
@@ -119,14 +119,29 @@ function Draw (){
 }
 
 function ScaleValues (){
-    x2.innerHTML = Number(radius.value);
-    x1.innerHTML = Number(radius.value)/2;
-    xMin1.innerHTML = -(Number(radius.value)/2);
-    xMin2.innerHTML = -(Number(radius.value));
-    y2.innerHTML = Number(radius.value);
-    y1.innerHTML = Number(radius.value)/2;
-    yMin1.innerHTML = -(Number(radius.value)/2);
-    yMin2.innerHTML = -(Number(radius.value));
+
+    var radiusLength = radius.value.toString().length;
+
+    if (radiusLength < 6){
+        x2.innerHTML = Number(radius.value);
+        x1.innerHTML = Number(radius.value)/2;
+        xMin1.innerHTML = -(Number(radius.value)/2);
+        xMin2.innerHTML = -(Number(radius.value));
+        y2.innerHTML = Number(radius.value);
+        y1.innerHTML = Number(radius.value)/2;
+        yMin1.innerHTML = -(Number(radius.value)/2);
+        yMin2.innerHTML = -(Number(radius.value));
+    }
+    else {
+        x2.innerHTML = (Number(radius.value)).toExponential(3);
+        x1.innerHTML = (Number(radius.value)/2).toExponential(3);
+        xMin1.innerHTML = (-(Number(radius.value)/2)).toExponential(3);
+        xMin2.innerHTML = (-(Number(radius.value))).toExponential(3);
+        y2.innerHTML = (Number(radius.value)).toExponential(3);
+        y1.innerHTML = (Number(radius.value)/2).toExponential(3);
+        yMin1.innerHTML = (-(Number(radius.value)/2)).toExponential(3);
+        yMin2.innerHTML = (-(Number(radius.value))).toExponential(3);
+    }
 }
 
 function EarthSun() {
@@ -136,6 +151,9 @@ function EarthSun() {
     massPlanet.value = 1.989e30;
     gravConst.value = 6.67408e-11;
     deltaTime.value = 1000;
+
+    trailColor = "#0389FB";
+    document.getElementById("m").style.backgroundColor = "#0389FB";
 
     setup();
 }
