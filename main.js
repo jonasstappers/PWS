@@ -15,20 +15,16 @@ var trailColors = ["#2781A3","#6EA327","#6D27A3 ","#CD518B ","#A35827 ","#F4B683
 
 var x1 = document.getElementById("scalevalue_x1");
 var x2 = document.getElementById("scalevalue_x2");
-var x3 = document.getElementById("scalevalue_x3");
-var x4 = document.getElementById("scalevalue_x4");
 var xMin1 = document.getElementById("scalevalue_x-1");
 var xMin2 = document.getElementById("scalevalue_x-2");
-var xMin3 = document.getElementById("scalevalue_x-3");
-var xMin4 = document.getElementById("scalevalue_x-4");
 var y1 = document.getElementById("scalevalue_y1");
 var y2 = document.getElementById("scalevalue_y2");
-var y3 = document.getElementById("scalevalue_y3");
-var y4 = document.getElementById("scalevalue_y4");
 var yMin1 = document.getElementById("scalevalue_y-1");
 var yMin2 = document.getElementById("scalevalue_y-2");
-var yMin3 = document.getElementById("scalevalue_y-3");
-var yMin4 = document.getElementById("scalevalue_y-4");
+
+
+var windowHeigth = window.innerHeight;
+var windowWidth = window.innerWidth;
 
 var G;
 var dt;
@@ -125,6 +121,8 @@ function Draw (){
 	if (i % 5 === 0){
 		OrbitTrail();
 	}
+
+  GridSize();
 }
 
 function ScaleValues (){
@@ -132,41 +130,24 @@ function ScaleValues (){
     var radiusLength = radius.value.toString().length;
 
     if (radiusLength < 6){
-
-        x4.innerHTML = (Number(radius.value)*2);
-        x3.innerHTML = (Number(radius.value)*1.5);
         x2.innerHTML = (Number(radius.value));
         x1.innerHTML = (Number(radius.value)/2);
         xMin1.innerHTML = (-(Number(radius.value)/2));
         xMin2.innerHTML = (-(Number(radius.value)));
-        xMin3.innerHTML = (-(Number(radius.value)*1.5));
-        xMin4.innerHTML = (-(Number(radius.value)*2));
-        y4.innerHTML = (Number(radius.value)*2);
-        y3.innerHTML = (Number(radius.value)*1.5);
         y2.innerHTML = (Number(radius.value));
         y1.innerHTML = (Number(radius.value)/2);
         yMin1.innerHTML = (-(Number(radius.value)/2));
         yMin2.innerHTML = (-(Number(radius.value)));
-        yMin3.innerHTML = (-(Number(radius.value)*1.5));
-        yMin4.innerHTML = (-(Number(radius.value)*2));
     }
     else {
-        x4.innerHTML = (Number(radius.value)*2).toExponential(3);
-        x3.innerHTML = (Number(radius.value)*1.5).toExponential(3);
         x2.innerHTML = (Number(radius.value)).toExponential(3);
         x1.innerHTML = (Number(radius.value)/2).toExponential(3);
         xMin1.innerHTML = (-(Number(radius.value)/2)).toExponential(3);
         xMin2.innerHTML = (-(Number(radius.value))).toExponential(3);
-        xMin3.innerHTML = (-(Number(radius.value)*1.5)).toExponential(3);
-        xMin4.innerHTML = (-(Number(radius.value)*2)).toExponential(3);
-        y4.innerHTML = (Number(radius.value)*2).toExponential(3);
-        y3.innerHTML = (Number(radius.value)*1.5).toExponential(3);
         y2.innerHTML = (Number(radius.value)).toExponential(3);
         y1.innerHTML = (Number(radius.value)/2).toExponential(3);
         yMin1.innerHTML = (-(Number(radius.value)/2)).toExponential(3);
         yMin2.innerHTML = (-(Number(radius.value))).toExponential(3);
-        yMin3.innerHTML = (-(Number(radius.value)*1.5)).toExponential(3);
-        yMin4.innerHTML = (-(Number(radius.value)*2)).toExponential(3);
     }
 }
 
