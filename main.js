@@ -9,6 +9,10 @@ var setValue = document.getElementById("Set");
 var trail = document.getElementById("trail");
 var deleteTrail = document.getElementById("deletetrail");
 var background = document.getElementById("gridtoggle");
+var earthSun = document.getElementById("earth_sun");
+var trailColor = "#1BA39C";
+var trailColors = ["#2781A3","#6EA327","#6D27A3 ","#CD518B ","#A35827 ","#F4B683","#3754CB","#27A36B","#6D27A3","#D2106A","#D1590B","#63C02A","#88F7C5","#78DEF6","#BADA64","#8078F5","#5DFBF6","#FEE1B6"]
+
 var x1 = document.getElementById("scalevalue_x1");
 var x2 = document.getElementById("scalevalue_x2");
 var xMin1 = document.getElementById("scalevalue_x-1");
@@ -17,9 +21,9 @@ var y1 = document.getElementById("scalevalue_y1");
 var y2 = document.getElementById("scalevalue_y2");
 var yMin1 = document.getElementById("scalevalue_y-1");
 var yMin2 = document.getElementById("scalevalue_y-2");
-var earthSun = document.getElementById("earth_sun");
-var trailColor = "#1BA39C";
-var trailColors = ["#2781A3","#6EA327","#6D27A3 ","#CD518B ","#A35827 ","#F4B683","#3754CB","#27A36B","#6D27A3","#D2106A","#D1590B","#63C02A","#88F7C5","#78DEF6","#BADA64","#8078F5","#5DFBF6","#FEE1B6"];
+
+var windowHeigth = window.innerHeight;
+var windowWidth = window.innerWidth;
 
 var G;
 var dt;
@@ -132,6 +136,7 @@ function Draw (){
 	if (i % 5 === 0){
 		OrbitTrail();
 	}
+
 }
 
 function ScaleValues (){
@@ -139,14 +144,14 @@ function ScaleValues (){
     var radiusLength = radius.value.toString().length;
 
     if (radiusLength < 6){
-        x2.innerHTML = Number(radius.value);
-        x1.innerHTML = Number(radius.value)/2;
-        xMin1.innerHTML = -(Number(radius.value)/2);
-        xMin2.innerHTML = -(Number(radius.value));
-        y2.innerHTML = Number(radius.value);
-        y1.innerHTML = Number(radius.value)/2;
-        yMin1.innerHTML = -(Number(radius.value)/2);
-        yMin2.innerHTML = -(Number(radius.value));
+        x2.innerHTML = (Number(radius.value));
+        x1.innerHTML = (Number(radius.value)/2);
+        xMin1.innerHTML = (-(Number(radius.value)/2));
+        xMin2.innerHTML = (-(Number(radius.value)));
+        y2.innerHTML = (Number(radius.value));
+        y1.innerHTML = (Number(radius.value)/2);
+        yMin1.innerHTML = (-(Number(radius.value)/2));
+        yMin2.innerHTML = (-(Number(radius.value)));
     }
     else {
         x2.innerHTML = (Number(radius.value)).toExponential(3);
