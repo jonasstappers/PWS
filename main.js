@@ -122,7 +122,6 @@ function Draw (){
 		OrbitTrail();
 	}
 
-  GridSize();
 }
 
 function ScaleValues (){
