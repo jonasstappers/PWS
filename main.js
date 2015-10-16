@@ -1,5 +1,5 @@
 var vDwarf = document.getElementById("vDwarf");
-var vPlanet = document.getElementById("vPlanet");
+//var vPlanet = document.getElementById("vPlanet");
 var massPlanet = document.getElementById("Massplanet");
 var massDwarf = document.getElementById("Massdwarf");
 var gravConst = document.getElementById("Gravconst");
@@ -65,7 +65,7 @@ function setup (){
 	planet = {
 		element: document.getElementById("M"),
 		mass: Number(massPlanet.value),
-		velocity: new Vector(0, -Number(vPlanet.value)),
+		//velocity: new Vector(0, -Number(vPlanet.value)),
 		acceleration: new Vector(0, 0),
 		position: new Vector(0, 0)
 	};
