@@ -1,5 +1,5 @@
 var vDwarf = document.getElementById("vDwarf");
-var vPlanet = document.getElementById("vPlanet");
+//var vPlanet = document.getElementById("vPlanet");
 var massPlanet = document.getElementById("Massplanet");
 var massDwarf = document.getElementById("Massdwarf");
 var gravConst = document.getElementById("Gravconst");
@@ -9,6 +9,13 @@ var setValue = document.getElementById("Set");
 var trail = document.getElementById("trail");
 var deleteTrail = document.getElementById("deletetrail");
 var background = document.getElementById("gridtoggle");
+var earthSun = document.getElementById("earth_sun");
+var trailColor = "#1BA39C";
+var trailColors = ["#2781A3","#6EA327","#6D27A3 ","#CD518B ","#A35827 ",
+				   "#F4B683","#3754CB","#27A36B","#6D27A3","#D2106A",
+				   "#D1590B","#63C02A","#88F7C5","#78DEF6","#BADA64",
+				   "#8078F5","#5DFBF6","#FEE1B6"];
+
 var x1 = document.getElementById("scalevalue_x1");
 var x2 = document.getElementById("scalevalue_x2");
 var xMin1 = document.getElementById("scalevalue_x-1");
@@ -17,18 +24,23 @@ var y1 = document.getElementById("scalevalue_y1");
 var y2 = document.getElementById("scalevalue_y2");
 var yMin1 = document.getElementById("scalevalue_y-1");
 var yMin2 = document.getElementById("scalevalue_y-2");
-var earthSun = document.getElementById("earth_sun");
-var trailColor = "#1BA39C";
-var trailColors = ["#2781A3","#6EA327","#6D27A3 ","#CD518B ","#A35827 ","#F4B683","#3754CB","#27A36B","#6D27A3","#D2106A","#D1590B","#63C02A","#88F7C5","#78DEF6","#BADA64","#8078F5","#5DFBF6","#FEE1B6"]
+
+var windowHeigth = window.innerHeight;
+var windowWidth = window.innerWidth;
 
 var G;
 var dt;
 var t;
+var c = 299792458;
 var i = 0;
 var scale;
 
 var dwarf;
 var planet;
+var forceDwarf;
+var forcePlanet;
+var distance;
+var mu;
 
 setValue.addEventListener("click", setup);
 setValue.addEventListener("click", ChangeColor);
@@ -44,21 +56,21 @@ function setup (){
 
 	dwarf = {
 		element: document.getElementById("m"),
-		mass: massDwarf.value,
-		velocity: new Vector(0, -vDwarf.value),
+		mass: Number(massDwarf.value),
+		velocity: new Vector(0, -Number(vDwarf.value)),
 		acceleration: new Vector(0, 0),
 		position: new Vector(sVar, 0)
 	};
 
 	planet = {
 		element: document.getElementById("M"),
-		mass: massPlanet.value,
-		velocity: new Vector(0, -vPlanet.value),
+		mass: Number(massPlanet.value),
+		//velocity: new Vector(0, -Number(vPlanet.value)),
 		acceleration: new Vector(0, 0),
 		position: new Vector(0, 0)
 	};
 
-	G = gravConst.value;
+	G = Number(gravConst.value);
 	dtScalar = deltaTime.value;
 
     ScaleValues();
@@ -78,30 +90,72 @@ function mainLoop(){
 requestAnimationFrame(mainLoop);
 
 function Calc (){
-	var forceDwarf = planet.position.clone().subtract(dwarf.position);
+	forceDwarf = planet.position.clone().subtract(dwarf.position);
 
-	var distance = forceDwarf.clone().magnitude();
+	distance = forceDwarf.clone().magnitude();
+	
+
+	forcePlanet = dwarf.position.clone().subtract(planet.position);
+	//forcePlanet.normalize();
+	console.clear();
+
+	var h = 0.1;
+
+	mu = (dwarf.mass * planet.mass) / (dwarf.mass + planet.mass);
+	console.log("mu: " + mu);
+	//console.log("L: " + L);
+
+	var gravforce = (GravForce(distance + h) - GravForce(distance)) / h;
+	var momentum = (Momentum(distance + h) - Momentum(distance)) / h;
+	var relativity = (Relativity(distance + h) - Relativity(distance)) / h;
+
+	console.log("momentum: " + Momentum(distance));
+
 	forceDwarf.normalize();
 
-	var forcePlanet = dwarf.position.clone().subtract(planet.position);
-	forcePlanet.normalize();
+	console.log("g: " + gravforce);
+	console.log("m: " + momentum);
+	console.log("r: " + relativity)
 
-	var gravforce = (G * dwarf.mass * planet.mass)/(distance * distance);
-	forceDwarf.multiplyScalar(gravforce);
-	forcePlanet.multiplyScalar(gravforce);
+	var force = gravforce + momentum + relativity;
+	forceDwarf.multiplyScalar(force);
+	//forcePlanet.multiplyScalar(force);
 
 	var aDwarf = forceDwarf.clone().divideScalar(dwarf.mass);
-	var aPlanet = forcePlanet.clone().divideScalar(planet.mass);
+	//var aPlanet = forcePlanet.clone().divideScalar(planet.mass);
 
 	dwarf.acceleration.add(aDwarf);
 	dwarf.velocity.add(dwarf.acceleration.clone().multiplyScalar(dt));
 	dwarf.position.add(dwarf.velocity.clone().multiplyScalar(dt));
 	dwarf.acceleration.zero();
 
-	planet.acceleration.add(aPlanet);
-	planet.velocity.add(planet.acceleration.clone().multiplyScalar(dt));
-	planet.position.add(planet.velocity.clone().multiplyScalar(dt));
-	planet.acceleration.zero();
+	// planet.acceleration.add(aPlanet);
+	// planet.velocity.add(planet.acceleration.clone().multiplyScalar(dt));
+	// planet.position.add(planet.velocity.clone().multiplyScalar(dt));
+	// planet.acceleration.zero();
+}
+
+function GravForce (r){
+	var grav = (G * dwarf.mass * planet.mass) / r;
+	return -grav;
+}
+
+function Momentum(r) {
+	var angle = Math.acos(dwarf.velocity.clone().dot(forceDwarf)/(dwarf.velocity.clone().magnitude() * forceDwarf.clone().magnitude()));
+	console.log("Angle: " + angle);
+	var L = r * Number(dwarf.mass) * dwarf.velocity.clone().magnitude() * Math.sin(angle);
+	console.log("L: " + L);
+	var mom = (L * L) / (2 * mu * r * r);
+	console.log("Mom: " + mom);
+	console.log("r: " + r);
+	return mom;
+}
+
+function Relativity(r) {
+	var angle = Math.acos(dwarf.velocity.clone().dot(forceDwarf)/(dwarf.velocity.clone().magnitude() * forceDwarf.clone().magnitude()));
+	var L = r * Number(dwarf.mass) * dwarf.velocity.clone().magnitude() * Math.sin(angle);
+	var rel = ((G * dwarf.mass + G * planet.mass) * (L * L)) / (c * c * mu * r * r * r);
+	return -rel;
 }
 
 function Draw (){
@@ -116,6 +170,7 @@ function Draw (){
 	if (i % 5 === 0){
 		OrbitTrail();
 	}
+
 }
 
 function ScaleValues (){
@@ -123,14 +178,14 @@ function ScaleValues (){
     var radiusLength = radius.value.toString().length;
 
     if (radiusLength < 6){
-        x2.innerHTML = Number(radius.value);
-        x1.innerHTML = Number(radius.value)/2;
-        xMin1.innerHTML = -(Number(radius.value)/2);
-        xMin2.innerHTML = -(Number(radius.value));
-        y2.innerHTML = Number(radius.value);
-        y1.innerHTML = Number(radius.value)/2;
-        yMin1.innerHTML = -(Number(radius.value)/2);
-        yMin2.innerHTML = -(Number(radius.value));
+        x2.innerHTML = (Number(radius.value));
+        x1.innerHTML = (Number(radius.value)/2);
+        xMin1.innerHTML = (-(Number(radius.value)/2));
+        xMin2.innerHTML = (-(Number(radius.value)));
+        y2.innerHTML = (Number(radius.value));
+        y1.innerHTML = (Number(radius.value)/2);
+        yMin1.innerHTML = (-(Number(radius.value)/2));
+        yMin2.innerHTML = (-(Number(radius.value)));
     }
     else {
         x2.innerHTML = (Number(radius.value)).toExponential(3);
@@ -225,6 +280,10 @@ Vector.prototype.normalize = function() {
 		this.divide(new Vector(magnitude, magnitude));
 	}
 	return this;
+};
+
+Vector.prototype.dot = function (vec) {
+    return this.x * vec.x + this.y * vec.y;
 };
 
 Vector.prototype.addX = function (vec) {
