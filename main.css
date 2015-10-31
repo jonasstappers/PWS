@@ -29,8 +29,8 @@ body {
     display: block;
     -webkit-transform: translateX(0);
     transform: translateX(0);
-    transition: all 0.3s ease;
-    -webkit-transition: all 0.3s ease;
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
 }
 
 #backgroundimage {
@@ -279,8 +279,8 @@ header {
     background-color:#22313F;
     transform: translateX(300px);
     -webkit-transform:translateX(300px);
-    transition: all 0.3s ease;
-    -webkit-transition: all 0.3s ease;
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
     overflow: auto;
     z-index: 10;
 }
@@ -373,6 +373,27 @@ button:active {
     cursor: pointer;
 }
 
+#test:checked {
+    background: white;
+}
+
+
+label#extratermsbutton {
+    display: block;
+    width:100%;
+    height: 40px;
+    border: solid #ECF0F1 2px;
+    text-align: center;
+    font-family: 'Moon';
+    font-size:18px;
+    font-weight: 200;
+    color: #ECF0F1;
+    border-radius:1px;
+    line-height: 2;
+
+}
+
+
 label#controlstoggler {
     z-index:5;
     display: block;
@@ -389,7 +410,7 @@ label#controlstoggler {
     display: block;
     line-height: 100%;
     opacity: 0.4;
-    transition: opacity 0.3s;
+    transition: opacity 0.2s;
 }
 
 label#controlstoggler:hover {
@@ -407,9 +428,9 @@ label#controlstoggler:hover {
     color:#ECF0F1;
     transform: rotateY(0deg);
     -webkit-transform: rotateY(0deg);
-    transition: all 0.3s;
-    -webkit-transition: all 0.3s;
-    line-height: 100%
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+    line-height: 100%;
 
 }
 
@@ -432,108 +453,75 @@ input[type="checkbox"]#togglebox:checked ~ div#controlpanel {
     -webkit-transform: translateX(0);
 }
 
-input[type="checkbox"]#togglebox:checked ~ div#arrow {
-    transform: rotateY(180deg);
-    -webkit-transform: rotateY(180deg);
+
+input[type="radio"]#terms {
+    position: absolute;
+    top:0;
+    left:0;
+    visibility: hidden;
 }
 
-/*@media screen and (max-width: 1300px) {
-    #controlpanel {
-        width:150px;
-        margin-left: -150px;
-    }
+input[type="radio"]#moving {
+    position: absolute;
+    top:0;
+    left:0;
+    visibility: hidden;
 }
 
-@media screen and (max-width: 1000px) {
+label#termslabel {
+  display: block;
+  height:35px;
+  outline: none;
+  border: solid #ECF0F1 2px;
+  background:transparent;
+  font-family: 'Moon';
+  font-size:18px;
+  font-weight: 200;
+  color: #ECF0F1;
+  border-radius:1px;
+  text-align: center;
+  line-height: 2;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+}
 
-    #controlpanel {
-        width:100%;
-        position:absolute;
-        top:100%;
-        left:0%;
-        height:110px;
-        margin-left: 0px;
-        margin-top:-110px;
+label#termslabel:hover {
+  background-color:#336E7B;
+  border: solid #336E7B 2px;
+  cursor: pointer;
+}
 
-        background: rgba(99,109,121,0.4)
-    }
+label#movinglabel {
+  display: block;
+  height:35px;
+  outline: none;
+  border: solid #ECF0F1 2px;
+  background:transparent;
+  font-family: 'Moon';
+  font-size:18px;
+  font-weight: 200;
+  color: #ECF0F1;
+  border-radius:1px;
+  text-align: center;
+  line-height: 2;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+}
 
-    #name-input {
-        float: left;
-        width: 14.2857%;
-        display: block;
-    }
+label#movinglabel:hover {
+  background-color:#336E7B;
+  border: solid #336E7B 2px;
+  cursor: pointer;
+}
 
-    input {
-        border: none;
-        background: transparent;
-        border-bottom: solid 2px #ECF0F1;
-        width:80%;
-        height: 30px;
-        margin-bottom: 0px;
-        margin-left:10%;
-        font-family: 'Moon';
-        font-size:16px;
-        font-weight: 200;
-        color:#ECF0F1;
-        transition: all 0.5s;
-        float:left;
-    }
+input[type=radio]#terms:checked ~ label#termslabel {
+  background-color:#6C7A89;
+  border: solid #ECF0F1 2px;
+}
 
-    #controlname {
-        font-family: 'Moon';
-        color: #ECF0F1;
-        margin-left: 10%;
-        font-size:16px;
-        font-weight:200;
-        text-decoration: none;
-        margin-bottom: 0px;
-    }
-
-    #controls {
-        width:100%;
-        margin:auto;
-        margin-top:10px;
-    }
-
-    #buttons {
-        width:100%;
-        height: 30px;
-        float: left;
-    }
-
-    button {
-        position: static;
-        width:23%;
-        height:30px;
-        outline: none;
-        border: solid #ECF0F1 2px;
-        background:transparent;
-        font-family: 'Moon';
-        font-size:16px;
-        font-weight: 200;
-        color: #ECF0F1;
-        border-radius:1px;
-        transition: all 0.5s;
-        margin-top: 10px;
-        margin-bottom: 0px;
-        margin-right:0px;
-        margin-left:1.7%;
-        float: left;
-    }
-    #earth_sun {
-        width:23%;
-        height:30px;
-        outline: none;
-        border: solid #ECF0F1 2px;
-        background:transparent;
-        font-family: 'Moon';
-        font-size:16px;
-        font-weight: 200;
-        color: #ECF0F1;
-        border-radius:1px;
-        transition: all 0.5s;
-        margin-bottom: 15px;
-        margin-top: 10px;
-    }
-}*/
+input[type=radio]#moving:checked ~ label#movinglabel {
+  background-color:#6C7A89;
+  border: solid #ECF0F1 2px;
+}
