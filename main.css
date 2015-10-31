@@ -311,17 +311,16 @@ input {
     font-size:18px;
     font-weight: 200;
     color:#ECF0F1;
-    transition: all 0.5s;
+    transition: all 0.2s;
 }
 
 input:hover {
-    border-bottom: solid 2px #68AFAA;
-    color:#68AFAA;
+    border-bottom: solid 2px #336E7B;
+    color:#336E7B;
 }
 
 input:focus {
-    border-bottom: solid 2px #68AFAA;
-/*    border:solid 1px #68AFAA;*/
+    border-bottom: solid 2px #336E7B;
     outline:none;
 }
 
@@ -336,19 +335,19 @@ button {
     font-weight: 200;
     color: #ECF0F1;
     border-radius:1px;
-    transition: all 0.5s;
+    transition: all 0.2s;
     margin-bottom: 15px;
 }
 
 button:hover {
-    background-color:#478883;
-    border: solid #478883 2px;
+    background-color:#336E7B;
+    border: solid #336E7B 2px;
     cursor: pointer;
 }
 
 button:active {
-    background-color:#478883;
-    border: solid #478883 2px;
+    background-color:#336E7B;
+    border: solid #336E7B 2px;
     cursor: pointer;
 }
 
@@ -363,7 +362,7 @@ button:active {
     font-weight: 200;
     color: #ECF0F1;
     border-radius:1px;
-    transition: all 0.5s;
+    transition: all 0.2s;
     margin-bottom: 15px;
     margin-top: 10px;
 }
@@ -488,8 +487,8 @@ label#termslabel {
 }
 
 label#termslabel:hover {
-  background-color:#336E7B;
-  border: solid #336E7B 2px;
+  background-color:#6C7A89;
+  border: solid #6C7A89 2px;
   cursor: pointer;
 }
 
@@ -511,8 +510,8 @@ label#movinglabel {
 }
 
 label#movinglabel:hover {
-  background-color:#336E7B;
-  border: solid #336E7B 2px;
+  background-color:#6C7A89;
+  border: solid #6C7A89 2px;
   cursor: pointer;
 }
 
