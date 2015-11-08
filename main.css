@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+::-webkit-scrollbar { 
+    display: none; 
+}
+
 .center-anchor {
     -webkit-transform: translate(-50% , -50%);
 }

@@ -40,6 +40,7 @@ var planet;
 var forceDwarf;
 var forcePlanet;
 var distance;
+var radiocheck;
 var mu;
 
 setValue.addEventListener("click", setup);
@@ -54,6 +55,8 @@ function setup (){
     sVar = Number(radius.value);
     scale = 400 / sVar;
 
+    radiocheck = document.getElementById('terms').checked;
+
 	dwarf = {
 		element: document.getElementById("m"),
 		mass: Number(massDwarf.value),
@@ -65,7 +68,7 @@ function setup (){
 	planet = {
 		element: document.getElementById("M"),
 		mass: Number(massPlanet.value),
-		//velocity: new Vector(0, -Number(vPlanet.value)),
+		velocity: new Vector(0, -Number(vPlanet.value)),
 		acceleration: new Vector(0, 0),
 		position: new Vector(0, 0)
 	};
@@ -90,60 +93,57 @@ function mainLoop(){
 requestAnimationFrame(mainLoop);
 
 function Calc (){
-
-	var radiocheck = document.getElementById('terms').checked;
-
 	console.log(radiocheck);
 
-	if (radiocheck = true) {
-		
-			forceDwarf = planet.position.clone().subtract(dwarf.position);
+	forceDwarf = planet.position.clone().subtract(dwarf.position);
 
-			distance = forceDwarf.clone().magnitude();
+	distance = forceDwarf.clone().magnitude();
 
+	forcePlanet = dwarf.position.clone().subtract(planet.position);
+	forcePlanet.normalize();
+	console.clear();
 
-			forcePlanet = dwarf.position.clone().subtract(planet.position);
-			//forcePlanet.normalize();
-			console.clear();
+	var h = 0.1;
 
-			var h = 0.1;
+	mu = (dwarf.mass * planet.mass) / (dwarf.mass + planet.mass);
+	//console.log("mu: " + mu);
+	//console.log("L: " + L);
 
-			mu = (dwarf.mass * planet.mass) / (dwarf.mass + planet.mass);
-			// console.log("mu: " + mu);
-			//console.log("L: " + L);
+	var gravforce = (GravForce(distance + h) - GravForce(distance)) / h;
+	var momentum = (Momentum(distance + h) - Momentum(distance)) / h;
+	var relativity = (Relativity(distance + h) - Relativity(distance)) / h;
 
-			var gravforce = (GravForce(distance + h) - GravForce(distance)) / h;
-			var momentum = (Momentum(distance + h) - Momentum(distance)) / h;
-			var relativity = (Relativity(distance + h) - Relativity(distance)) / h;
+	// console.log("momentum: " + Momentum(distance));
 
-			// console.log("momentum: " + Momentum(distance));
+	forceDwarf.normalize();
 
-			forceDwarf.normalize();
+	// console.log("g: " + gravforce);
+	// console.log("m: " + momentum);
+	// console.log("r: " + relativity);
 
-			// console.log("g: " + gravforce);
-			// console.log("m: " + momentum);
-			// console.log("r: " + relativity);
-
-			var force = gravforce + momentum + relativity;
-			forceDwarf.multiplyScalar(force);
-			//forcePlanet.multiplyScalar(force);
-
-			var aDwarf = forceDwarf.clone().divideScalar(dwarf.mass);
-			//var aPlanet = forcePlanet.clone().divideScalar(planet.mass);
-
-			dwarf.acceleration.add(aDwarf);
-			dwarf.velocity.add(dwarf.acceleration.clone().multiplyScalar(dt));
-			dwarf.position.add(dwarf.velocity.clone().multiplyScalar(dt));
-			dwarf.acceleration.zero();
-
-			// planet.acceleration.add(aPlanet);
-			// planet.velocity.add(planet.acceleration.clone().multiplyScalar(dt));
-			// planet.position.add(planet.velocity.clone().multiplyScalar(dt));
-			// planet.acceleration.zero();
+	if (radiocheck){
+		var force = gravforce + momentum + relativity;
+	} else{
+		var force = gravforce;
 	}
 
-	else if (radiocheck = false) {
-	}
+	console.log(force);
+	
+	forceDwarf.multiplyScalar(force);
+	forcePlanet.multiplyScalar(force);
+
+	var aDwarf = forceDwarf.clone().divideScalar(dwarf.mass);
+	var aPlanet = forcePlanet.clone().divideScalar(planet.mass);
+
+	dwarf.acceleration.add(aDwarf);
+	dwarf.velocity.add(dwarf.acceleration.clone().multiplyScalar(dt));
+	dwarf.position.add(dwarf.velocity.clone().multiplyScalar(dt));
+	dwarf.acceleration.zero();
+
+	planet.acceleration.add(aPlanet);
+	planet.velocity.add(planet.acceleration.clone().multiplyScalar(dt));
+	planet.position.add(planet.velocity.clone().multiplyScalar(dt));
+	planet.acceleration.zero();
 }
 
 function GravForce (r){
@@ -173,8 +173,13 @@ function Draw (){
 	dwarf.element.style.marginLeft = (dwarf.position.x * scale) + "px";
 	dwarf.element.style.marginTop = (dwarf.position.y * scale) + "px";
 
-	planet.element.style.marginLeft = (planet.position.x * scale) + "px";
-	planet.element.style.marginTop = (planet.position.y * scale) + "px";
+	if(radiocheck == false){
+		planet.element.style.marginLeft = (planet.position.x * scale) + "px";
+		planet.element.style.marginTop = (planet.position.y * scale) + "px";
+	} else{
+		planet.element.style.marginLeft = "0px";
+		planet.element.style.marginTop = "0px";
+	}
 
 	i++;
 
