@@ -41,6 +41,7 @@ var forceDwarf;
 var forcePlanet;
 var distance;
 var radiocheck;
+var dwarfSpeed;
 var mu;
 
 setValue.addEventListener("click", setup);
@@ -97,7 +98,6 @@ function mainLoop(){
 requestAnimationFrame(mainLoop);
 
 function Calc (){
-
 	forceDwarf = planet.position.clone().subtract(dwarf.position);
 
 	distance = forceDwarf.clone().magnitude();
@@ -141,13 +141,15 @@ function Calc (){
 	dwarf.acceleration.add(aDwarf);
 	dwarf.velocity.add(dwarf.acceleration.clone().multiplyScalar(dt));
 	dwarf.position.add(dwarf.velocity.clone().multiplyScalar(dt));
+	dwarfSpeed = dwarf.position.clone().magnitude();
 	dwarf.acceleration.zero();
 
-	planet.acceleration.add(aPlanet);
-	planet.velocity.add(planet.acceleration.clone().multiplyScalar(dt));
-	planet.position.add(planet.velocity.clone().multiplyScalar(dt));
-	planet.acceleration.zero();
-
+	if (!radiocheck) {
+		planet.acceleration.add(aPlanet);
+		planet.velocity.add(planet.acceleration.clone().multiplyScalar(dt));
+		planet.position.add(planet.velocity.clone().multiplyScalar(dt));
+		planet.acceleration.zero();
+	}
 }
 
 function GravForce (r){
@@ -177,13 +179,8 @@ function Draw (){
 	dwarf.element.style.marginLeft = (dwarf.position.x * scale) + "px";
 	dwarf.element.style.marginTop = (dwarf.position.y * scale) + "px";
 
-	if(radiocheck == false){
-		planet.element.style.marginLeft = (planet.position.x * scale) + "px";
-		planet.element.style.marginTop = (planet.position.y * scale) + "px";
-	} else{
-		planet.element.style.marginLeft = "0px";
-		planet.element.style.marginTop = "0px";
-	}
+	planet.element.style.marginLeft = (planet.position.x * scale) + "px";
+	planet.element.style.marginTop = (planet.position.y * scale) + "px";
 
 	i++;
 
@@ -269,7 +266,7 @@ function ResetTrail (){
 }
 
 function Value () {
-		document.getElementById('speedvalue').innerHTML = "1000";
+		document.getElementById('speedvalue').innerHTML = dwarfSpeed.toFixed(2);
 }
 
 function Vector (x, y) {
