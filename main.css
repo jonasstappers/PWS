@@ -4,8 +4,8 @@
     box-sizing: border-box;
 }
 
-::-webkit-scrollbar { 
-    display: none; 
+::-webkit-scrollbar {
+    display: none;
 }
 
 .center-anchor {
@@ -218,12 +218,6 @@ header {
         opacity: 0;
     }
 }
-#dashboard {
-    position:fixed;
-    top:30px;
-    left:30px;
-    width:150px;
-}
 
 #speedview{
     width:100%;
@@ -272,9 +266,50 @@ header {
     z-index: -2;
 }
 
+#dashboard {
+    width: 300px;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    height: 100%;
+    background-color:#22313F;
+    transform: translateX(-300px);
+    -webkit-transform:translateX(-300px);
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    overflow: auto;
+    z-index: 20;
+}
+
+#meters {
+    width: 90%;
+    margin: auto;
+    margin-top: 35px;
+}
+
+#metername {
+    font-family: 'Moon';
+    color: #ECF0F1;
+    font-size:24px;
+    font-weight:200;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+.value {
+    font-family: 'Moon';
+    color: #ECF0F1;
+    font-size:35px;
+    font-weight:200;
+    text-decoration: none;
+    border: solid 2px #ECF0F1;
+    height: 50px;
+    line-height: 1.5;
+    padding-left: 10px;
+}
+
+
 #controlpanel {
-
-
     width:300px;
     position:fixed;
     top:0%;
@@ -395,6 +430,29 @@ label#extratermsbutton {
     line-height: 2;
 
 }
+label#dashboardtoggler {
+    z-index:5;
+    display: block;
+    position: absolute;
+    font-family: 'Moon';
+    font-size:2em;
+    width:200px;
+    top:100%;
+    left:0%;
+    margin-left: 100px;
+    margin-top: -70px;
+    color: #ECF0F1;
+    cursor: pointer;
+    display: block;
+    line-height: 100%;
+    opacity: 0.4;
+    transition: opacity 0.2s;
+}
+
+label#dashboardtoggler:hover {
+    opacity: 1;
+}
+
 
 
 label#controlstoggler {
@@ -425,6 +483,23 @@ label#controlstoggler:hover {
     position: absolute;
     font-size: 2.5em;
     top:100%;
+    left:0%;
+    margin-top:-55px;
+    margin-left:-35px;
+    color:#ECF0F1;
+    transform: rotateY(0deg);
+    -webkit-transform: rotateY(0deg);
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+    line-height: 100%;
+
+}
+#arrow1 {
+    font-family: 'Moon';
+    font-weight: 300;
+    position: absolute;
+    font-size: 2.5em;
+    top:100%;
     left:100%;
     margin-top:-55px;
     margin-left:-20px;
@@ -436,7 +511,12 @@ label#controlstoggler:hover {
     line-height: 100%;
 
 }
-
+input[type="checkbox"]#toggledashboard {
+    position: absolute;
+    top:0;
+    left:0;
+    visibility: hidden;
+}
 
 input[type="checkbox"]#togglebox {
     position: absolute;
@@ -451,7 +531,17 @@ input[type="checkbox"]#togglebox:checked ~ div#content {
     -webkit-transform: translateX(-300px);
 }
 
+input[type="checkbox"]#toggledashboard:checked ~ div#content {
+    transform: translateX(300px);
+    -webkit-transform: translateX(300px);
+}
+
 input[type="checkbox"]#togglebox:checked ~ div#controlpanel {
+    transform: translateX(0);
+    -webkit-transform: translateX(0);
+}
+
+input[type="checkbox"]#toggledashboard:checked ~ div#dashboard {
     transform: translateX(0);
     -webkit-transform: translateX(0);
 }

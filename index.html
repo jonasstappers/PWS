@@ -11,6 +11,14 @@
 </head>
 <body>
 		<input type="checkbox" id="togglebox" />
+		<input type="checkbox" id="toggledashboard" />
+
+		<div id="dashboard">
+			<div id="meters">
+					<div id="metername">Speed (m/s)</div>
+					<div id="speedvalue" class="value"></div>
+			</div>
+		</div>
 
 		<div id="content">
 				<header>
@@ -55,9 +63,9 @@
 		    <div id="trail">
 
 		    </div>
-				<label for="togglebox" id="controlstoggler">controls <div id="arrow">></div></label>
+				<label for="toggledashboard" id="dashboardtoggler"><div id="arrow"><</div> dashboard</label>
+				<label for="togglebox" id="controlstoggler">controls <div id="arrow1">></div></label>
 		</div>
-
     <div id="controlpanel">
 
         <div id="controls">
@@ -105,13 +113,7 @@
 
             </div>
       </div>
-    </div>
-
-    <!-- <div id="dashboard">
-        <div id="speedview">
-        100 m/s
-        </div>
-    </div> -->
+		</div>
 
 
     <script src="main.js" type="text/javascript"></script>

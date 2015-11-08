@@ -51,6 +51,9 @@ earthSun.addEventListener("click", EarthSun);
 
 setup();
 
+
+
+
 function setup (){
     sVar = Number(radius.value);
     scale = 400 / sVar;
@@ -82,6 +85,7 @@ function setup (){
 function mainLoop(){
 	Calc();
 	Draw();
+	Value();
 	requestAnimationFrame(mainLoop);
 
 	var now = new Date().getTime();
@@ -93,7 +97,6 @@ function mainLoop(){
 requestAnimationFrame(mainLoop);
 
 function Calc (){
-	console.log(radiocheck);
 
 	forceDwarf = planet.position.clone().subtract(dwarf.position);
 
@@ -128,7 +131,7 @@ function Calc (){
 	}
 
 	console.log(force);
-	
+
 	forceDwarf.multiplyScalar(force);
 	forcePlanet.multiplyScalar(force);
 
@@ -144,6 +147,7 @@ function Calc (){
 	planet.velocity.add(planet.acceleration.clone().multiplyScalar(dt));
 	planet.position.add(planet.velocity.clone().multiplyScalar(dt));
 	planet.acceleration.zero();
+
 }
 
 function GravForce (r){
@@ -262,6 +266,10 @@ function ResetTrail (){
     while (elem.firstChild){
     	elem.removeChild(elem.firstChild);
     }
+}
+
+function Value () {
+		document.getElementById('speedvalue').innerHTML = "1000";
 }
 
 function Vector (x, y) {
