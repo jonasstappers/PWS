@@ -42,6 +42,7 @@ var forcePlanet;
 var distance;
 var radiocheck;
 var dwarfSpeed;
+var dwarfRadius;
 var mu;
 
 setValue.addEventListener("click", setup);
@@ -142,6 +143,7 @@ function Calc (){
 	dwarf.velocity.add(dwarf.acceleration.clone().multiplyScalar(dt));
 	dwarf.position.add(dwarf.velocity.clone().multiplyScalar(dt));
 	dwarfSpeed = dwarf.velocity.clone().magnitude();
+	dwarfRadius = dwarf.position.clone().magnitude();
 	dwarf.acceleration.zero();
 
 	if (!radiocheck) {
@@ -267,6 +269,7 @@ function ResetTrail (){
 
 function Value () {
 		document.getElementById('speedvalue').innerHTML = dwarfSpeed.toFixed(2);
+		document.getElementById('radiusvalue').innerHTML = dwarfRadius.toFixed(2);
 }
 
 function Vector (x, y) {
