@@ -141,7 +141,7 @@ function Calc (){
 	dwarf.acceleration.add(aDwarf);
 	dwarf.velocity.add(dwarf.acceleration.clone().multiplyScalar(dt));
 	dwarf.position.add(dwarf.velocity.clone().multiplyScalar(dt));
-	dwarfSpeed = dwarf.position.clone().magnitude();
+	dwarfSpeed = dwarf.velocity.clone().magnitude();
 	dwarf.acceleration.zero();
 
 	if (!radiocheck) {
