@@ -11,9 +11,9 @@
 </head>
 <body>
 		<input type="checkbox" id="togglebox" />
-		<input type="checkbox" id="toggledashboard" />
+		<!-- <input type="checkbox" id="toggledashboard" /> -->
 
-		<div id="dashboard">
+		<div id="dashboard" style="display:block;">
 			<div id="meters">
 					<div id="metername">Speed (m/s)</div>
 					<div id="speedvalue" class="value"></div>
@@ -65,7 +65,7 @@
 		    <div id="trail">
 
 		    </div>
-				<label for="toggledashboard" id="dashboardtoggler"><div id="arrow"><</div> dashboard</label>
+				<!-- <label for="toggledashboard" id="dashboardtoggler"><div id="arrow"><</div> dashboard</label> -->
 				<label for="togglebox" id="controlstoggler">controls <div id="arrow1">></div></label>
 		</div>
     <div id="controlpanel">
@@ -103,7 +103,9 @@
             <button name="Set" id="Set">Set Values</button>
             <button name="deletetrail" id="deletetrail">Delete Trail</button>
             <button name="gridtoggle" id="gridtoggle">Grid on/off</button>
+						<button name="dashboardbutton" id="dashboardbutton">dashboard on/off</button>
 	        	<button name="earth_sun" id="earth_sun">Sun-Earth</button>
+
 
 						<input type="radio" name="code" id="terms" checked/>
 						<input type="radio" name="code" id="moving"/>

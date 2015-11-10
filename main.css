@@ -267,14 +267,11 @@ header {
 }
 
 #dashboard {
-    width: 300px;
+    width: 200px;
     position: fixed;
     top: 0%;
     left: 0%;
     height: 100%;
-    background-color:#22313F;
-    transform: translateX(-300px);
-    -webkit-transform:translateX(-300px);
     transition: all 0.2s ease;
     -webkit-transition: all 0.2s ease;
     overflow: auto;
@@ -293,8 +290,9 @@ header {
     font-size:24px;
     font-weight:200;
     text-decoration: none;
-    margin-bottom: 10px;
-    margin-top: 25px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    overflow: hidden;
 }
 
 .value {
@@ -303,10 +301,12 @@ header {
     font-size:35px;
     font-weight:200;
     text-decoration: none;
-    border: solid 2px #ECF0F1;
+    border: solid 1px #ECF0F1;
+    border-radius: 1px;
     height: 50px;
     line-height: 1.5;
     padding-left: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 
@@ -417,21 +417,7 @@ button:active {
 }
 
 
-label#extratermsbutton {
-    display: block;
-    width:100%;
-    height: 40px;
-    border: solid #ECF0F1 2px;
-    text-align: center;
-    font-family: 'Moon';
-    font-size:18px;
-    font-weight: 200;
-    color: #ECF0F1;
-    border-radius:1px;
-    line-height: 2;
-
-}
-label#dashboardtoggler {
+/*label#dashboardtoggler {
     z-index:5;
     display: block;
     position: absolute;
@@ -448,11 +434,11 @@ label#dashboardtoggler {
     line-height: 100%;
     opacity: 0.4;
     transition: opacity 0.2s;
-}
+}*/
 
-label#dashboardtoggler:hover {
+/*label#dashboardtoggler:hover {
     opacity: 1;
-}
+}*/
 
 
 
@@ -531,21 +517,21 @@ input[type="checkbox"]#togglebox:checked ~ div#content {
     transform: translateX(-300px);
     -webkit-transform: translateX(-300px);
 }
-
+/*
 input[type="checkbox"]#toggledashboard:checked ~ div#content {
     transform: translateX(300px);
     -webkit-transform: translateX(300px);
-}
+}*/
 
 input[type="checkbox"]#togglebox:checked ~ div#controlpanel {
     transform: translateX(0);
     -webkit-transform: translateX(0);
 }
-
+/*
 input[type="checkbox"]#toggledashboard:checked ~ div#dashboard {
     transform: translateX(0);
     -webkit-transform: translateX(0);
-}
+}*/
 
 
 input[type="radio"]#terms {
@@ -575,7 +561,7 @@ label#termslabel {
   border-radius:1px;
   text-align: center;
   line-height: 2;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-bottom: 10px;
   transition: all 0.2s;
   -webkit-transition: all 0.2s;

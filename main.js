@@ -34,7 +34,6 @@ var t;
 var c = 299792458;
 var i = 0;
 var scale;
-
 var dwarf;
 var planet;
 var forceDwarf;
@@ -50,7 +49,7 @@ setValue.addEventListener("click", ChangeColor);
 deleteTrail.addEventListener("click", ResetTrail);
 background.addEventListener("click", ToggleGrid);
 earthSun.addEventListener("click", EarthSun);
-
+dashboardbutton.addEventListener("click", ToggleDashboard);
 setup();
 
 
@@ -242,6 +241,16 @@ function ToggleGrid(){
     }
 }
 
+function ToggleDashboard(){
+    var toggleDashboard = document.getElementById("dashboard");
+
+    if (toggleDashboard.style.display == "block") {
+        toggleDashboard.style.display = "none";
+    } else {
+        toggleDashboard.style.display = "block";
+    }
+}
+
 function ChangeColor (){
     var randomColor = trailColors[Math.floor(Math.random() * trailColors.length)];
     trailColor = randomColor;
@@ -268,8 +277,22 @@ function ResetTrail (){
 }
 
 function Value () {
-		document.getElementById('speedvalue').innerHTML = dwarfSpeed.toFixed(2);
-		document.getElementById('radiusvalue').innerHTML = dwarfRadius.toFixed(2);
+		var speedvalueLength = dwarfSpeed.toFixed(1).toString().length;
+		var radiusvalueLength = dwarfRadius.toFixed(1).toString().length;
+
+		if (speedvalueLength > 8) {
+			document.getElementById('speedvalue').innerHTML = dwarfSpeed.toExponential(3);
+		}
+		else {
+			document.getElementById('speedvalue').innerHTML = dwarfSpeed.toFixed(2);
+		}
+
+		if (radiusvalueLength > 8) {
+			document.getElementById('radiusvalue').innerHTML = dwarfRadius.toExponential(3);
+		}
+		else {
+			document.getElementById('radiusvalue').innerHTML = dwarfRadius.toFixed(2);
+		}
 }
 
 function Vector (x, y) {
