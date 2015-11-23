@@ -110,13 +110,13 @@ function Calc (){
 
 	mu = (dwarf.mass * planet.mass) / (dwarf.mass + planet.mass);
 	//console.log("mu: " + mu);
-	//console.log("L: " + L);
+	console.log("L: " + L);
 
 	var gravforce = (GravForce(distance + h) - GravForce(distance)) / h;
 	var momentum = (Momentum(distance + h) - Momentum(distance)) / h;
 	var relativity = (Relativity(distance + h) - Relativity(distance)) / h;
 
-	// console.log("momentum: " + Momentum(distance));
+	console.log("momentum: " + Momentum(distance));
 
 	forceDwarf.normalize();
 
