@@ -130,7 +130,7 @@ function Calc (){
 		var force = gravforce;
 	}
 
-	console.log(force);
+	// console.log(force);
 
 	forceDwarf.multiplyScalar(force);
 	forcePlanet.multiplyScalar(force);
@@ -185,7 +185,7 @@ function Draw (){
 
 	i++;
 
-	if (i % 5 === 0){
+	if (i % 10 === 0){
 		OrbitTrail();
 	}
 
