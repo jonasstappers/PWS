@@ -110,7 +110,7 @@ function Calc (){
 
 	mu = (dwarf.mass * planet.mass) / (dwarf.mass + planet.mass);
 	//console.log("mu: " + mu);
-	console.log("L: " + L);
+	// console.log("L: " + L);
 
 	var gravforce = (GravForce(distance + h) - GravForce(distance)) / h;
 	var momentum = (Momentum(distance + h) - Momentum(distance)) / h;
@@ -162,7 +162,7 @@ function Momentum(r) {
 	var angle = Math.acos(dwarf.velocity.clone().dot(forceDwarf)/(dwarf.velocity.clone().magnitude() * forceDwarf.clone().magnitude()));
 	// console.log("Angle: " + angle);
 	var L = r * Number(dwarf.mass) * dwarf.velocity.clone().magnitude() * Math.sin(angle);
-	// console.log("L: " + L);
+	console.log("L: " + L);
 	var mom = (L * L) / (2 * mu * r * r);
 	// console.log("Mom: " + mom);
 	// console.log("r: " + r);
