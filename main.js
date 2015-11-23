@@ -185,7 +185,7 @@ function Draw (){
 
 	i++;
 
-	if (i % 10 === 0){
+	if (i % 5 === 0){
 		OrbitTrail();
 	}
 
