@@ -11,7 +11,7 @@ var deleteTrail = document.getElementById("deletetrail");
 var background = document.getElementById("gridtoggle");
 var earthSun = document.getElementById("earth_sun");
 var trailColor = "#1BA39C";
-var trailColors = ["#2781A3","#6EA327","#6D27A3 ","#CD518B ","#A35827 ",
+var trailColors = ["#2781A3","#6EA327","#1BA39C ","#CD518B ","#A35827 ",
 				   "#F4B683","#3754CB","#27A36B","#6D27A3","#D2106A",
 				   "#D1590B","#63C02A","#88F7C5","#78DEF6","#BADA64",
 				   "#8078F5","#5DFBF6","#FEE1B6"];
