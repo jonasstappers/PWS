@@ -64,7 +64,7 @@ function setup (){
 	dwarf = {
 		element: document.getElementById("m"),
 		mass: Number(massDwarf.value),
-		velocity: new Vector(0, -Number(vDwarf.value)),
+		velocity: new Vector(0, Number(vDwarf.value)),
 		acceleration: new Vector(0, 0),
 		position: new Vector(sVar, 0)
 	};
@@ -72,7 +72,7 @@ function setup (){
 	planet = {
 		element: document.getElementById("M"),
 		mass: Number(massPlanet.value),
-		velocity: new Vector(0, -Number(vPlanet.value)),
+		velocity: new Vector(0, Number(vPlanet.value)),
 		acceleration: new Vector(0, 0),
 		position: new Vector(0, 0)
 	};
@@ -177,10 +177,10 @@ function Relativity(r) {
 }
 
 function Draw (){
-	dwarf.element.style.marginLeft = (dwarf.position.x * scale) + "px";
+	dwarf.element.style.marginLeft = (-dwarf.position.x * scale) + "px";
 	dwarf.element.style.marginTop = (dwarf.position.y * scale) + "px";
 
-	planet.element.style.marginLeft = (planet.position.x * scale) + "px";
+	planet.element.style.marginLeft = (-planet.position.x * scale) + "px";
 	planet.element.style.marginTop = (planet.position.y * scale) + "px";
 
 	i++;
