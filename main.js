@@ -108,7 +108,7 @@ function Calc (){
 	
 	console.clear();
 
-	var h = 0.001;
+	var h = 0.1;
 
 	mu = (dwarf.mass * planet.mass) / (dwarf.mass + planet.mass);
 	//console.log("mu: " + mu);
@@ -177,10 +177,10 @@ function Relativity(r) {
 }
 
 function Draw (){
-	dwarf.element.style.marginLeft = (-dwarf.position.x * scale) + "px";
+	dwarf.element.style.marginLeft = (dwarf.position.x * scale) + "px";
 	dwarf.element.style.marginTop = (dwarf.position.y * scale) + "px";
 
-	planet.element.style.marginLeft = (-planet.position.x * scale) + "px";
+	planet.element.style.marginLeft = (planet.position.x * scale) + "px";
 	planet.element.style.marginTop = (planet.position.y * scale) + "px";
 
 	i++;
@@ -261,7 +261,7 @@ function OrbitTrail(){
     var trailDot = document.createElement("div");
     trailDot.id = "Dot";
 
-    trailDot.style.marginLeft = (-dwarf.position.x * scale) + "px";
+    trailDot.style.marginLeft = (dwarf.position.x * scale) + "px";
     trailDot.style.marginTop = (dwarf.position.y * scale) + "px";
     trailDot.style.backgroundColor = trailColor;
 
