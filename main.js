@@ -261,7 +261,7 @@ function OrbitTrail(){
     var trailDot = document.createElement("div");
     trailDot.id = "Dot";
 
-    trailDot.style.marginLeft = (dwarf.position.x * scale) + "px";
+    trailDot.style.marginLeft = (-dwarf.position.x * scale) + "px";
     trailDot.style.marginTop = (dwarf.position.y * scale) + "px";
     trailDot.style.backgroundColor = trailColor;
 
