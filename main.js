@@ -43,6 +43,8 @@ var radiocheck;
 var dwarfSpeed;
 var dwarfRadius;
 var mu;
+var angle;
+var L;
 
 setValue.addEventListener("click", setup);
 setValue.addEventListener("click", ChangeColor);
@@ -163,7 +165,7 @@ function GravForce (r){
 function Momentum(r) {
 	var angle = Math.acos(dwarf.velocity.clone().dot(fone)/(dwarf.velocity.clone().magnitude() * fone.magnitude()));
 	// console.log("Angle: " + angle);
-	var L = r * Number(dwarf.mass) * dwarf.velocity.clone().magnitude() * Math.sin(180 - angle);
+	var L = r * Number(dwarf.mass) * dwarf.velocity.clone().magnitude() * Math.sin(angle);
 	console.log("L: " + L);
 	var mom = (L * L) / (2 * mu * r * r);
 	// console.log("Mom: " + mom);
@@ -172,9 +174,6 @@ function Momentum(r) {
 }
 
 function Relativity(r) {
-	// the angle out 
-	var angle = Math.acos(dwarf.velocity.clone().dot(fone)/(dwarf.velocity.clone().magnitude() * fone.clone().magnitude()));
-	var L = r * Number(dwarf.mass) * dwarf.velocity.clone().magnitude() * Math.sin(180 - angle);
 	var rel = ((G * dwarf.mass + G * planet.mass) * (L * L)) / (c * c * mu * r * r * r);
 	return -rel;
 }
