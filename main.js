@@ -64,7 +64,7 @@ function setup (){
 	dwarf = {
 		element: document.getElementById("m"),
 		mass: Number(massDwarf.value),
-		velocity: new Vector(0, Number(vDwarf.value)),
+		velocity: new Vector(0, -Number(vDwarf.value)),
 		acceleration: new Vector(0, 0),
 		position: new Vector(sVar, 0)
 	};
@@ -72,7 +72,7 @@ function setup (){
 	planet = {
 		element: document.getElementById("M"),
 		mass: Number(massPlanet.value),
-		velocity: new Vector(0, Number(vPlanet.value)),
+		velocity: new Vector(0, -Number(vPlanet.value)),
 		acceleration: new Vector(0, 0),
 		position: new Vector(0, 0)
 	};
@@ -100,10 +100,6 @@ requestAnimationFrame(mainLoop);
 function Calc (){
 	forceDwarf = planet.position.clone().subtract(dwarf.position);
 	forcePlanet = dwarf.position.clone().subtract(planet.position);
-	
-	fone = planet.position.clone().subtract(dwarf.position);
-	ftwo = dwarf.position.clone().subtract(planet.position);
-	
 	distance = forceDwarf.clone().magnitude();
 	
 	forceDwarf.normalize();
@@ -161,8 +157,8 @@ function GravForce (r){
 }
 
 function Momentum(r) {
-	var angle = Math.acos(dwarf.velocity.clone().dot(fone)/(dwarf.velocity.clone().magnitude() * fone.magnitude()));
-	// console.log("Angle: " + angle);
+	var angle = Math.acos(dwarf.velocity.clone().normalize().dot(forceDwarf));
+	console.log("Angle: " + angle);
 	var L = r * Number(dwarf.mass) * dwarf.velocity.clone().magnitude() * Math.sin(angle);
 	console.log("L: " + L);
 	var mom = (L * L) / (2 * mu * r * r);
@@ -172,7 +168,7 @@ function Momentum(r) {
 }
 
 function Relativity(r) {
-	var angle = Math.acos(dwarf.velocity.clone().dot(fone)/(dwarf.velocity.clone().magnitude() * fone.magnitude()));
+	var angle = Math.acos(dwarf.velocity.clone().normalize().dot(forceDwarf));
 	var L = r * Number(dwarf.mass) * dwarf.velocity.clone().magnitude() * Math.sin(angle);
 	var rel = ((G * dwarf.mass + G * planet.mass) * (L * L)) / (c * c * mu * r * r * r);
 	return -rel;
