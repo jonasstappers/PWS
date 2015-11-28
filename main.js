@@ -25,8 +25,6 @@ var y2 = document.getElementById("scalevalue_y2");
 var yMin1 = document.getElementById("scalevalue_y-1");
 var yMin2 = document.getElementById("scalevalue_y-2");
 
-var windowHeigth = window.innerHeight;
-var windowWidth = window.innerWidth;
 
 var G;
 var dt;
@@ -81,12 +79,15 @@ function setup (){
 	dtScalar = deltaTime.value;
 
     ScaleValues();
+
 }
 
 function mainLoop(){
 	Calc();
 	Draw();
 	Value();
+	VectorLines();
+
 	requestAnimationFrame(mainLoop);
 
 	var now = new Date().getTime();
@@ -101,10 +102,10 @@ function Calc (){
 	forceDwarf = planet.position.clone().subtract(dwarf.position);
 	forcePlanet = dwarf.position.clone().subtract(planet.position);
 	distance = forceDwarf.clone().magnitude();
-	
+
 	forceDwarf.normalize();
 	forcePlanet.normalize();
-	
+
 	console.clear();
 
 	var h = 0.1;
@@ -146,7 +147,7 @@ function Calc (){
 		planet.position.add(planet.velocity.clone().multiplyScalar(dt));
 		planet.acceleration.zero();
 	}
-	
+
 	dwarfSpeed = dwarf.velocity.clone().magnitude();
 	dwarfRadius = dwarf.position.clone().magnitude();
 }
@@ -187,6 +188,32 @@ function Draw (){
 		OrbitTrail();
 	}
 
+}
+
+function VectorLines (){
+		var windowHeigth = window.innerHeight;
+		var windowWidth = window.innerWidth;
+
+		var dwarfpositionx = ((0.5*windowWidth)+(dwarf.position.x * scale));
+		var dwarfpositiony = ((0.5*windowHeigth)+(dwarf.position.y * scale));
+
+		var dwarfvelocityx = dwarf.velocity.x;
+		var dwarfvelocityy = dwarf.velocity.y;
+
+		console.log(scale);
+		console.log(dwarfpositionx);
+		var svg = document.getElementById('svg');
+		svg.setAttribute("height",windowHeigth);
+		svg.setAttribute("width",windowWidth);
+
+
+		var line1 = document.getElementById("line1");
+
+		line1.style.stroke="#fff";
+		line1.setAttribute("x1",(dwarfpositionx + dwarfvelocityx));
+		line1.setAttribute("y1",(dwarfpositiony + dwarfvelocityy));
+		line1.setAttribute("x2",dwarfpositionx);
+		line1.setAttribute("y2",dwarfpositiony);
 }
 
 function ScaleValues (){

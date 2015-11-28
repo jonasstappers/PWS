@@ -23,11 +23,9 @@
 		</div>
 
 		<div id="content">
-				<header>
-		        <div id="Title">
-		            <img id="titleimg" src="assets/img/title.png">
-		        </div>
-		    </header>
+				<div id="Title">
+								<img id="titleimg" src="assets/img/title.png">
+				</div>
 		    <div id="background" style="display: block;">
 		        <div id="backgroundimage">
 		        </div>
@@ -61,7 +59,13 @@
 		        <div id="m" class="center-anchor">
 
 		        </div>
+
 		    </div>
+				<div id="vectorlines">
+					<svg id="svg" height="500" width="500">
+						<line id="line1" x1="20" y1="50" x2="0" y2="0" style="stroke:#fff;stroke-width:1"/>
+					</svg>
+				</div>
 		    <div id="trail">
 
 		    </div>
@@ -72,7 +76,7 @@
         <div id="controls">
         <div id="name-input">
             <div id="controlname">Radius</div>
-            <input type="text" name="Radius" id="Radius" value="400" />
+            <input type="text" name="Radius" id="Radius" value="20000" />
         </div>
         <div id="name-input">
             <div id="controlname">Time Scale</div>
@@ -80,7 +84,7 @@
         </div>
         <div id="name-input">
             <div id="controlname">V<sub>0</sub> Small object</div>
-            <input type="text" name="vDwarf" id="vDwarf" value="2" />
+            <input type="text" name="vDwarf" id="vDwarf" value="50" />
         </div>
         <div id="name-input">
             <div id="controlname">V<sub>0</sub> Big object</div>
@@ -92,7 +96,7 @@
         </div>
         <div id="name-input">
             <div id="controlname">Mass big object</div>
-            <input type="text" name="Massplanet" id="Massplanet" value="200" />
+            <input type="text" name="Massplanet" id="Massplanet" value="10000000" />
         </div>
         <div id="name-input">
             <div id="controlname">constant G</div>
@@ -125,7 +129,7 @@
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-	
+
 	  ga('create', 'UA-70019246-1', 'auto');
 	  ga('send', 'pageview');
 

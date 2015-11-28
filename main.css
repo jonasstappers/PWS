@@ -192,16 +192,19 @@ header {
 }
 
 #titleimg {
+    position: absolute;
+    top:2%;
+    left:50%;
     width:100%;
     margin:auto;
     display: block;
     opacity: 1;
-    margin-top:2%;
-    max-width:600px;
+    -webkit-transform: translate(-50% , 0);
+    max-width:700px;
     z-index: 100;
     opacity: 1;
-    animation: fadeImg 4s 5s forwards;
-    -webkit-animation: fadeImg 4s 5s forwards;
+    animation: fadeImg 10s 10s forwards;
+    -webkit-animation: fadeImg 10s 10s forwards;
 }
 @keyframes fadeImg {
     to {
@@ -255,6 +258,8 @@ header {
     margin-left:-400px;
     z-index: -1;
 }
+
+
 
 #Dot {
     position:absolute;
