@@ -1,5 +1,5 @@
 var vDwarf = document.getElementById("vDwarf");
-//var vPlanet = document.getElementById("vPlanet");
+var vPlanet = document.getElementById("vPlanet");
 var massPlanet = document.getElementById("Massplanet");
 var massDwarf = document.getElementById("Massdwarf");
 var gravConst = document.getElementById("Gravconst");
@@ -41,6 +41,8 @@ var radiocheck;
 var dwarfSpeed;
 var dwarfRadius;
 var mu;
+var velocity;
+var velocityscale;
 
 setValue.addEventListener("click", setup);
 setValue.addEventListener("click", ChangeColor);
@@ -56,6 +58,9 @@ setup();
 function setup (){
     sVar = Number(radius.value);
     scale = 400 / sVar;
+
+		velocity = Number(vDwarf.value);
+		velocityscale = 200 / velocity;
 
     radiocheck = document.getElementById('terms').checked;
 
@@ -99,6 +104,7 @@ function mainLoop(){
 requestAnimationFrame(mainLoop);
 
 function Calc (){
+
 	forceDwarf = planet.position.clone().subtract(dwarf.position);
 	forcePlanet = dwarf.position.clone().subtract(planet.position);
 	distance = forceDwarf.clone().magnitude();
@@ -197,23 +203,32 @@ function VectorLines (){
 		var dwarfpositionx = ((0.5*windowWidth)+(dwarf.position.x * scale));
 		var dwarfpositiony = ((0.5*windowHeigth)+(dwarf.position.y * scale));
 
-		var dwarfvelocityx = dwarf.velocity.x;
-		var dwarfvelocityy = dwarf.velocity.y;
+		var dwarfvelocityx = dwarf.velocity.x * velocityscale;
+		var dwarfvelocityy = dwarf.velocity.y * velocityscale;
 
-		console.log(scale);
-		console.log(dwarfpositionx);
+		var dwarfforcex = forceDwarf.clone().x * velocityscale;
+		var dwarfforcey = forceDwarf.clone().y * velocityscale;
+
+		console.log(velocityscale);
+		console.log(dwarfforcex);
 		var svg = document.getElementById('svg');
 		svg.setAttribute("height",windowHeigth);
 		svg.setAttribute("width",windowWidth);
 
 
 		var line1 = document.getElementById("line1");
+		var line2 = document.getElementById('line2');
 
-		line1.style.stroke="#fff";
 		line1.setAttribute("x1",(dwarfpositionx + dwarfvelocityx));
 		line1.setAttribute("y1",(dwarfpositiony + dwarfvelocityy));
 		line1.setAttribute("x2",dwarfpositionx);
 		line1.setAttribute("y2",dwarfpositiony);
+
+		line2.setAttribute("x1",(dwarfpositionx + dwarfforcex));
+		line2.setAttribute("y1",(dwarfpositiony + dwarfforcey));
+		line2.setAttribute("x2",dwarfpositionx);
+		line2.setAttribute("y2",dwarfpositiony);
+
 }
 
 function ScaleValues (){
