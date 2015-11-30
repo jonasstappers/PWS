@@ -10,9 +10,11 @@ var trail = document.getElementById("trail");
 var deleteTrail = document.getElementById("deletetrail");
 var background = document.getElementById("gridtoggle");
 var earthSun = document.getElementById("earth_sun");
+var precession = document.getElementById("precession");
+var ellips = document.getElementById("ellips");
 var trailColor = "#1BA39C";
 var trailColors = ["#2781A3","#6EA327","#1BA39C ","#CD518B ","#A35827 ",
-				   "#F4B683","#3754CB","#27A36B","#6D27A3","#D2106A",
+				   "#F4B683","#3754CB","#27A36B","#D2106A",
 				   "#D1590B","#63C02A","#88F7C5","#78DEF6","#BADA64",
 				   "#8078F5","#5DFBF6","#FEE1B6"];
 
@@ -25,6 +27,7 @@ var y2 = document.getElementById("scalevalue_y2");
 var yMin1 = document.getElementById("scalevalue_y-1");
 var yMin2 = document.getElementById("scalevalue_y-2");
 
+var orbittrailvalue = 5;
 
 var G;
 var dt;
@@ -44,11 +47,15 @@ var mu;
 var velocity;
 var velocityscale;
 
+
+
 setValue.addEventListener("click", setup);
 setValue.addEventListener("click", ChangeColor);
 deleteTrail.addEventListener("click", ResetTrail);
 background.addEventListener("click", ToggleGrid);
 earthSun.addEventListener("click", EarthSun);
+precession.addEventListener("click", Precession);
+ellips.addEventListener("click", Ellips);
 dashboardbutton.addEventListener("click", ToggleDashboard);
 setup();
 
@@ -60,7 +67,7 @@ function setup (){
     scale = 400 / sVar;
 
 		velocity = Number(vDwarf.value);
-		velocityscale = 200 / velocity;
+		velocityscale = 100 / velocity;
 
     radiocheck = document.getElementById('terms').checked;
 
@@ -91,7 +98,7 @@ function mainLoop(){
 	Calc();
 	Draw();
 	Value();
-	VectorLines();
+	// VectorLines();
 
 	requestAnimationFrame(mainLoop);
 
@@ -190,46 +197,55 @@ function Draw (){
 
 	i++;
 
-	if (i % 5 === 0){
+	if (i % orbittrailvalue === 0){
 		OrbitTrail();
 	}
 
 }
 
-function VectorLines (){
-		var windowHeigth = window.innerHeight;
-		var windowWidth = window.innerWidth;
-
-		var dwarfpositionx = ((0.5*windowWidth)+(dwarf.position.x * scale));
-		var dwarfpositiony = ((0.5*windowHeigth)+(dwarf.position.y * scale));
-
-		var dwarfvelocityx = dwarf.velocity.x * velocityscale;
-		var dwarfvelocityy = dwarf.velocity.y * velocityscale;
-
-		var dwarfforcex = forceDwarf.clone().x * velocityscale;
-		var dwarfforcey = forceDwarf.clone().y * velocityscale;
-
-		console.log(velocityscale);
-		console.log(dwarfforcex);
-		var svg = document.getElementById('svg');
-		svg.setAttribute("height",windowHeigth);
-		svg.setAttribute("width",windowWidth);
-
-
-		var line1 = document.getElementById("line1");
-		var line2 = document.getElementById('line2');
-
-		line1.setAttribute("x1",(dwarfpositionx + dwarfvelocityx));
-		line1.setAttribute("y1",(dwarfpositiony + dwarfvelocityy));
-		line1.setAttribute("x2",dwarfpositionx);
-		line1.setAttribute("y2",dwarfpositiony);
-
-		line2.setAttribute("x1",(dwarfpositionx + dwarfforcex));
-		line2.setAttribute("y1",(dwarfpositiony + dwarfforcey));
-		line2.setAttribute("x2",dwarfpositionx);
-		line2.setAttribute("y2",dwarfpositiony);
-
-}
+// function VectorLines (){
+// 		var windowHeigth = window.innerHeight;
+// 		var windowWidth = window.innerWidth;
+//
+// 		var dwarfpositionx = ((0.5*windowWidth)+(dwarf.position.x * scale));
+// 		var dwarfpositiony = ((0.5*windowHeigth)+(dwarf.position.y * scale));
+//
+// 		var dwarfvelocityx = dwarf.velocity.x * velocityscale;
+// 		var dwarfvelocityy = dwarf.velocity.y * velocityscale;
+//
+// 		var dwarfaccelerationx = forceDwarf.clone().divideScalar(dwarf.mass).x;
+// 		var dwarfaccelerationy = forceDwarf.clone().divideScalar(dwarf.mass).y;
+//
+// 		var dwarfforcex = (dwarfaccelerationx * Number(deltaTime.value)*100);
+// 		var dwarfforcey = (dwarfaccelerationy * Number(deltaTime.value)*100);
+//
+// 		console.log(velocityscale);
+// 		console.log(dwarfforcex);
+// 		console.log(dwarf.velocity);
+// 		console.log(dwarfaccelerationx);
+// 		console.log(forceDwarf.magnitude());
+// 		console.log(Number(deltaTime.value));
+//
+//
+// 		var svg = document.getElementById('svg');
+// 		svg.setAttribute("height",windowHeigth);
+// 		svg.setAttribute("width",windowWidth);
+//
+//
+// 		var line1 = document.getElementById("line1");
+// 		var line2 = document.getElementById('line2');
+//
+// 		line1.setAttribute("x1",(dwarfpositionx + dwarfvelocityx));
+// 		line1.setAttribute("y1",(dwarfpositiony + dwarfvelocityy));
+// 		line1.setAttribute("x2",dwarfpositionx);
+// 		line1.setAttribute("y2",dwarfpositiony);
+//
+// 		line2.setAttribute("x1",(dwarfpositionx + dwarfforcex));
+// 		line2.setAttribute("y1",(dwarfpositiony + dwarfforcey));
+// 		line2.setAttribute("x2",dwarfpositionx);
+// 		line2.setAttribute("y2",dwarfpositiony);
+//
+// }
 
 function ScaleValues (){
 
@@ -264,9 +280,40 @@ function EarthSun() {
     massPlanet.value = 1.989e30;
     gravConst.value = 6.67408e-11;
     deltaTime.value = 1000;
+		orbittrailvalue = 10;
 
     trailColor = "#0389FB";
     document.getElementById("m").style.backgroundColor = "#0389FB";
+
+    setup();
+}
+
+function Precession() {
+    vDwarf.value = 1;
+    radius.value = 20;
+    massDwarf.value = 1;
+    massPlanet.value = 10;
+    gravConst.value = 10;
+    deltaTime.value = 0.0015;
+		orbittrailvalue = 20;
+
+    trailColor = "#FEE1B6";
+    document.getElementById("m").style.backgroundColor = "#FEE1B6";
+
+    setup();
+}
+
+function Ellips() {
+    vDwarf.value = 5;
+    radius.value = 400;
+    massDwarf.value = 4;
+    massPlanet.value = 2000;
+    gravConst.value = 10;
+    deltaTime.value = 0.04;
+		orbittrailvalue = 5;
+
+    trailColor = "#27A36B";
+    document.getElementById("m").style.backgroundColor = "#27A36B";
 
     setup();
 }

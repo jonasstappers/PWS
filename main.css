@@ -417,34 +417,45 @@ button:active {
     cursor: pointer;
 }
 
-#test:checked {
-    background: white;
+#precession {
+    width:100%;
+    height:40px;
+    outline: none;
+    border: solid #ECF0F1 2px;
+    background:transparent;
+    font-family: 'Moon';
+    font-size:18px;
+    font-weight: 200;
+    color: #ECF0F1;
+    border-radius:1px;
+    transition: all 0.2s;
+    margin-bottom: 15px;
+}
+#precession:hover {
+    background-color:#1E8BC3;
+    border: solid #1E8BC3 2px;
+    cursor: pointer;
 }
 
-
-/*label#dashboardtoggler {
-    z-index:5;
-    display: block;
-    position: absolute;
+#ellips {
+    width:100%;
+    height:40px;
+    outline: none;
+    border: solid #ECF0F1 2px;
+    background:transparent;
     font-family: 'Moon';
-    font-size:2em;
-    width:200px;
-    top:100%;
-    left:0%;
-    margin-left: 100px;
-    margin-top: -70px;
+    font-size:18px;
+    font-weight: 200;
     color: #ECF0F1;
+    border-radius:1px;
+    transition: all 0.2s;
+    margin-bottom: 15px;
+}
+#ellips:hover {
+    background-color:#1E8BC3;
+    border: solid #1E8BC3 2px;
     cursor: pointer;
-    display: block;
-    line-height: 100%;
-    opacity: 0.4;
-    transition: opacity 0.2s;
-}*/
-
-/*label#dashboardtoggler:hover {
-    opacity: 1;
-}*/
-
+}
 
 
 label#controlstoggler {
