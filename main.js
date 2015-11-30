@@ -126,22 +126,27 @@ function Calc (){
 	mu = (dwarf.mass * planet.mass) / (dwarf.mass + planet.mass);
 	//console.log("mu: " + mu);
 	// console.log("L: " + L);
+	// var gravforce = (GravForce(distance + h) - GravForce(distance)) / h;
+	// var momentum = (Momentum(distance + h) - Momentum(distance)) / h;
+	// var relativity = (Relativity(distance + h) - Relativity(distance)) / h;
 
-	var termone = (firstterm(distance + h) - firstterm(distance)) / h;
-	var termtwo = (secondterm(distance + h) - secondterm(distance)) / h;
-	var termthree = (thirdterm(distance + h) - thirdterm(distance)) / h;
+	//console.log("momentum: " + Momentum(distance));
 
-	console.log("secondterm: " + secondterm(distance));
+	var angle = Math.acos(dwarf.velocity.clone().normalize().dot(forceDwarf));
+	var L = distance * dwarf.mass * dwarf.velocity.clone().magnitude() * Math.sin(Math.PI - angle);
 
+	var gravforce = (G * planet.mass * dwarf.mass) / Math.pow(distance, 2);
+	var momentum = Math.pow(L, 2) / (mu * Math.pow(distance, 3));
+	var relativity = (3 * G * planet.mass * Math.pow(L, 2)) / (Math.pow(c, 2) * Math.pow(distance, 4));
 
 	// console.log("g: " + firstterm);
 	// console.log("m: " + secondterm);
 	// console.log("r: " + thirdterm);
 
 	if (radiocheck){
-		var force = termone + termtwo + termthree;
+		var force = gravforce - momentum + relativity;
 	} else{
-		var force = termone;
+		var force = -gravforce;
 	}
 
 	// console.log(force);
@@ -165,28 +170,29 @@ function Calc (){
 	dwarfRadius = dwarf.position.clone().magnitude();
 }
 
-function firstterm(r){
-	var grav = (G * dwarf.mass * planet.mass) / r;
-	return -grav;
-}
+// function GravForce (r){
+// 	var grav = (G * dwarf.mass * planet.mass) / r;
+// 	return -grav;
+// }
 
-function secondterm(r) {
-	var angle = Math.acos(dwarf.velocity.clone().normalize().dot(forceDwarf));
-	console.log("Angle: " + angle);
-	var L = r * Number(dwarf.mass) * dwarf.velocity.clone().magnitude() * Math.sin(angle);
-	console.log("L: " + L);
-	var mom = (L * L) / (2 * mu * r * r);
-	// console.log("Mom: " + mom);
-	// console.log("r: " + r);
-	return mom;
-}
+// function Momentum(r) {
+// 	var angle = Math.acos(dwarf.velocity.clone().normalize().dot(forceDwarf));
+// 	console.log("Angle: " + angle);
+// 	var L = r * Number(dwarf.mass) * dwarf.velocity.clone().magnitude() * Math.sin(angle);
+// 	console.log("L: " + L);
+// 	var mom = (L * L) / (2 * mu * r * r);
+// 	// console.log("Mom: " + mom);
+// 	// console.log("r: " + r);
+// 	return mom;
+// }
 
-function thirdterm(r) {
-	var angle = Math.acos(dwarf.velocity.clone().normalize().dot(forceDwarf));
-	var L = r * Number(dwarf.mass) * dwarf.velocity.clone().magnitude() * Math.sin(angle);
-	var rel = ((G * dwarf.mass + G * planet.mass) * (L * L)) / (c * c * mu * r * r * r);
-	return -rel;
-}
+// function Relativity(r) {
+// 	var angle = Math.acos(dwarf.velocity.clone().normalize().dot(forceDwarf));
+// 	var L = r * Number(dwarf.mass) * dwarf.velocity.clone().magnitude() * Math.sin(angle);
+// 	var rel = ((G * dwarf.mass + G * planet.mass) * (L * L)) / (c * c * mu * r * r * r);
+// 	return -rel;
+// }
+
 
 function Draw (){
 	dwarf.element.style.marginLeft = (dwarf.position.x * scale) + "px";
@@ -274,7 +280,7 @@ function EarthSun() {
     massPlanet.value = 1.989e30;
     gravConst.value = 6.67408e-11;
     deltaTime.value = 1000;
-		orbittrailvalue = 10;
+	orbittrailvalue = 10;
 
     trailColor = "#0389FB";
     document.getElementById("m").style.backgroundColor = "#0389FB";
@@ -289,7 +295,7 @@ function Precession() {
     massPlanet.value = 10;
     gravConst.value = 10;
     deltaTime.value = 0.0015;
-		orbittrailvalue = 20;
+	orbittrailvalue = 20;
 
     trailColor = "#FEE1B6";
     document.getElementById("m").style.backgroundColor = "#FEE1B6";
@@ -304,7 +310,7 @@ function Ellips() {
     massPlanet.value = 2000;
     gravConst.value = 10;
     deltaTime.value = 0.04;
-		orbittrailvalue = 5;
+	orbittrailvalue = 5;
 
     trailColor = "#27A36B";
     document.getElementById("m").style.backgroundColor = "#27A36B";
