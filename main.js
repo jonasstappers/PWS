@@ -91,7 +91,7 @@ function mainLoop(){
 	Calc();
 	Draw();
 	Value();
-	VectorLines();
+	//VectorLines();
 
 	requestAnimationFrame(mainLoop);
 
@@ -120,21 +120,21 @@ function Calc (){
 	//console.log("mu: " + mu);
 	// console.log("L: " + L);
 
-	var gravforce = (GravForce(distance + h) - GravForce(distance)) / h;
-	var momentum = (Momentum(distance + h) - Momentum(distance)) / h;
-	var relativity = (Relativity(distance + h) - Relativity(distance)) / h;
+	var termone = (firstterm(distance + h) - firstterm(distance)) / h;
+	var termtwo = (secondterm(distance + h) - secondterm(distance)) / h;
+	var termthree = (thirdterm(distance + h) - thirdterm(distance)) / h;
 
-	console.log("momentum: " + Momentum(distance));
+	console.log("secondterm: " + secondterm(distance));
 
 
-	// console.log("g: " + gravforce);
-	// console.log("m: " + momentum);
-	// console.log("r: " + relativity);
+	// console.log("g: " + firstterm);
+	// console.log("m: " + secondterm);
+	// console.log("r: " + thirdterm);
 
 	if (radiocheck){
-		var force = gravforce + momentum + relativity;
+		var force = termone + termtwo + termthree;
 	} else{
-		var force = gravforce;
+		var force = termone;
 	}
 
 	// console.log(force);
@@ -158,12 +158,12 @@ function Calc (){
 	dwarfRadius = dwarf.position.clone().magnitude();
 }
 
-function GravForce (r){
+function firstterm(r){
 	var grav = (G * dwarf.mass * planet.mass) / r;
 	return -grav;
 }
 
-function Momentum(r) {
+function secondterm(r) {
 	var angle = Math.acos(dwarf.velocity.clone().normalize().dot(forceDwarf));
 	console.log("Angle: " + angle);
 	var L = r * Number(dwarf.mass) * dwarf.velocity.clone().magnitude() * Math.sin(angle);
@@ -174,7 +174,7 @@ function Momentum(r) {
 	return mom;
 }
 
-function Relativity(r) {
+function thirdterm(r) {
 	var angle = Math.acos(dwarf.velocity.clone().normalize().dot(forceDwarf));
 	var L = r * Number(dwarf.mass) * dwarf.velocity.clone().magnitude() * Math.sin(angle);
 	var rel = ((G * dwarf.mass + G * planet.mass) * (L * L)) / (c * c * mu * r * r * r);
@@ -196,40 +196,40 @@ function Draw (){
 
 }
 
-function VectorLines (){
-		var windowHeigth = window.innerHeight;
-		var windowWidth = window.innerWidth;
+// function VectorLines (){
+// 		var windowHeigth = window.innerHeight;
+// 		var windowWidth = window.innerWidth;
 
-		var dwarfpositionx = ((0.5*windowWidth)+(dwarf.position.x * scale));
-		var dwarfpositiony = ((0.5*windowHeigth)+(dwarf.position.y * scale));
+// 		var dwarfpositionx = ((0.5*windowWidth)+(dwarf.position.x * scale));
+// 		var dwarfpositiony = ((0.5*windowHeigth)+(dwarf.position.y * scale));
 
-		var dwarfvelocityx = dwarf.velocity.x * velocityscale;
-		var dwarfvelocityy = dwarf.velocity.y * velocityscale;
+// 		var dwarfvelocityx = dwarf.velocity.x * velocityscale;
+// 		var dwarfvelocityy = dwarf.velocity.y * velocityscale;
 
-		var dwarfforcex = forceDwarf.clone().x * velocityscale;
-		var dwarfforcey = forceDwarf.clone().y * velocityscale;
+// 		var dwarfforcex = forceDwarf.clone().x * velocityscale;
+// 		var dwarfforcey = forceDwarf.clone().y * velocityscale;
 
-		console.log(velocityscale);
-		console.log(dwarfforcex);
-		var svg = document.getElementById('svg');
-		svg.setAttribute("height",windowHeigth);
-		svg.setAttribute("width",windowWidth);
+// 		console.log(velocityscale);
+// 		console.log(dwarfforcex);
+// 		var svg = document.getElementById('svg');
+// 		svg.setAttribute("height",windowHeigth);
+// 		svg.setAttribute("width",windowWidth);
 
 
-		var line1 = document.getElementById("line1");
-		var line2 = document.getElementById('line2');
+// 		var line1 = document.getElementById("line1");
+// 		var line2 = document.getElementById('line2');
 
-		line1.setAttribute("x1",(dwarfpositionx + dwarfvelocityx));
-		line1.setAttribute("y1",(dwarfpositiony + dwarfvelocityy));
-		line1.setAttribute("x2",dwarfpositionx);
-		line1.setAttribute("y2",dwarfpositiony);
+// 		line1.setAttribute("x1",(dwarfpositionx + dwarfvelocityx));
+// 		line1.setAttribute("y1",(dwarfpositiony + dwarfvelocityy));
+// 		line1.setAttribute("x2",dwarfpositionx);
+// 		line1.setAttribute("y2",dwarfpositiony);
 
-		line2.setAttribute("x1",(dwarfpositionx + dwarfforcex));
-		line2.setAttribute("y1",(dwarfpositiony + dwarfforcey));
-		line2.setAttribute("x2",dwarfpositionx);
-		line2.setAttribute("y2",dwarfpositiony);
+// 		line2.setAttribute("x1",(dwarfpositionx + dwarfforcex));
+// 		line2.setAttribute("y1",(dwarfpositiony + dwarfforcey));
+// 		line2.setAttribute("x2",dwarfpositionx);
+// 		line2.setAttribute("y2",dwarfpositiony);
 
-}
+// }
 
 function ScaleValues (){
 
@@ -267,7 +267,7 @@ function EarthSun() {
 
     trailColor = "#0389FB";
     document.getElementById("m").style.backgroundColor = "#0389FB";
-
+    
     setup();
 }
 
