@@ -239,8 +239,8 @@ header {
     position:absolute;
     top:50%;
     left:50%;
-    height:70px;
-    width:70px;
+    height:65px;
+    width:65px;
     /*background-color:#F4B350  ;*/
     background-color:#EFBC30;
     border-radius:50%;
@@ -252,8 +252,8 @@ header {
     top:50%;
     left:50%;
     background-color:#1BA39C;
-    width:20px;
-    height:20px;
+    width:15px;
+    height:15px;
     border-radius: 50%;
     margin-left:-400px;
     z-index: -1;
