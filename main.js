@@ -46,7 +46,21 @@ var dwarfRadius;
 var mu;
 var velocity;
 var velocityscale;
+var minRadius = 0;
+var maxRadius = 0;
 
+var maxradiuspositionx = [];
+var maxradiuspositiony = [];
+var onetime = 0;
+var maxradiuspositionxMidvalue = 0;
+var maxradiuspositionxLasttwo = [0,0];
+var maxradiuspositionyMidvalue = 0;
+var maxradiuspositionyLasttwo = [0,0];
+
+var verschilX = 0;
+var verschilY = 0;
+var zijdetussentweepunten = 0;
+var precessionAngle = 0;
 
 
 setValue.addEventListener("click", setup);
@@ -91,12 +105,21 @@ function setup (){
 	dtScalar = deltaTime.value;
 
     ScaleValues();
-
+		maxRadius = 0;
+		minRadius = 0;
+		maxradiuspositionx = [];
+		maxradiuspositiony = [];
+		maxradiuspositionxLasttwo = [0,0];
+		maxradiuspositionyLasttwo = [0,0];
+		precessionAngle = 0;
 }
 
 function mainLoop(){
 	Calc();
 	Draw();
+	MaxRadius();
+	MinRadius();
+	PrecessionAngle();
 	Value();
 	//VectorLines();
 
@@ -168,6 +191,8 @@ function Calc (){
 
 	dwarfSpeed = dwarf.velocity.clone().magnitude();
 	dwarfRadius = dwarf.position.clone().magnitude();
+
+
 }
 
 function GravForce (r){
@@ -177,9 +202,9 @@ function GravForce (r){
 
 function Momentum(r) {
 	var angle = Math.acos(dwarf.velocity.clone().normalize().dot(forceDwarf));
-	console.log("Angle: " + angle);
+	// console.log("Angle: " + angle);
 	var L = r * Number(dwarf.mass) * dwarf.velocity.clone().magnitude() * Math.sin(angle);
-	console.log("L: " + L);
+	// console.log("L: " + L);
 	var mom = (L * L) / (2 * mu * r * r);
 	// console.log("Mom: " + mom);
 	// console.log("r: " + r);
@@ -280,11 +305,11 @@ function EarthSun() {
     massPlanet.value = 1.989e30;
     gravConst.value = 6.67408e-11;
     deltaTime.value = 1000;
-	orbittrailvalue = 10;
-	
+		orbittrailvalue = 10;
+
     trailColor = "#0389FB";
     document.getElementById("m").style.backgroundColor = "#0389FB";
-    
+
     setup();
 }
 
@@ -295,7 +320,7 @@ function Precession() {
     massPlanet.value = 10;
     gravConst.value = 10;
     deltaTime.value = 0.0015;
-	orbittrailvalue = 20;
+		orbittrailvalue = 20;
 
     trailColor = "#FEE1B6";
     document.getElementById("m").style.backgroundColor = "#FEE1B6";
@@ -366,6 +391,8 @@ function ResetTrail (){
 function Value () {
 		var speedvalueLength = dwarfSpeed.toFixed(1).toString().length;
 		var radiusvalueLength = dwarfRadius.toFixed(1).toString().length;
+		var minradiusvalueLength = minRadius.toFixed(1).toString().length;
+		var maxradiusvalueLength = maxRadius.toFixed(1).toString().length;
 
 		if (speedvalueLength > 8) {
 			document.getElementById('speedvalue').innerHTML = dwarfSpeed.toExponential(3);
@@ -380,6 +407,104 @@ function Value () {
 		else {
 			document.getElementById('radiusvalue').innerHTML = dwarfRadius.toFixed(2);
 		}
+
+		if (maxradiusvalueLength > 8) {
+			document.getElementById('maxradiusvalue').innerHTML = maxRadius.toExponential(3);
+		}
+		else {
+			document.getElementById('maxradiusvalue').innerHTML = maxRadius.toFixed(2);
+		}
+
+		if (minradiusvalueLength > 8) {
+			document.getElementById('minradiusvalue').innerHTML = minRadius.toExponential(3);
+		}
+		else {
+			document.getElementById('minradiusvalue').innerHTML = minRadius.toFixed(2);
+		}
+
+		if (precessionAngle == 0 || precessionAngle == NaN) {
+			document.getElementById('precessionanglevalue').innerHTML = "";
+		}
+		else if(precessionAngle > 0.1) {
+			document.getElementById('precessionanglevalue').innerHTML = precessionAngle.toFixed(2) + " &deg";
+		}
+		else if (precessionAngle <= 0.1 && precessionAngle >= 0.005) {
+			document.getElementById('precessionanglevalue').innerHTML = (precessionAngle.toFixed(2) * 60) + " '";
+		}
+		else if (precessionAngle <= 0.005) {
+			document.getElementById('precessionanglevalue').innerHTML = (precessionAngle.toFixed(2) * 3600) + " ''";
+		}
+}
+
+function MaxRadius () {
+		if (dwarfRadius > maxRadius) {
+			maxRadius = dwarfRadius;
+		}
+
+}
+
+function MinRadius () {
+		if (minRadius == 0) {
+			minRadius = Number(Radius.value);
+		}
+
+		if (dwarfRadius < minRadius) {
+			minRadius = dwarfRadius;
+		}
+
+}
+function PrecessionAngle () {
+		var roundedRadius = Number(dwarfRadius.toFixed(0));
+		var roundedmaxRadius = Number(maxRadius.toFixed(0));
+		var roundedpositionX = Number(dwarf.position.x).toFixed(0);
+		var inaccuracyvalue = Number(maxRadius * 0.01);
+
+		if (Number(dwarfRadius) >= (Number(maxRadius) - inaccuracyvalue) && Number(dwarfRadius) <= (Number(maxRadius) + inaccuracyvalue)){
+			maxradiuspositionx.unshift(dwarf.position.x);
+			maxradiuspositiony.unshift(dwarf.position.y);
+		}
+
+		if (roundedpositionX < 0){
+			if (onetime < 1){
+				onetime++;
+
+				maxradiuspositionxMidvalue = maxradiuspositionx[(Math.round((maxradiuspositionx.length - 1) / 2))];
+				maxradiuspositionxLasttwo.unshift(maxradiuspositionxMidvalue);
+				maxradiuspositionxLasttwo.pop();
+				maxradiuspositionx = [];
+
+				maxradiuspositionyMidvalue = maxradiuspositiony[(Math.round((maxradiuspositiony.length - 1) / 2))];
+				maxradiuspositionyLasttwo.unshift(maxradiuspositionyMidvalue);
+				maxradiuspositionyLasttwo.pop();
+				maxradiuspositiony = [];
+
+
+				verschilX = Math.abs(maxradiuspositionxLasttwo[0] - maxradiuspositionxLasttwo[1]);
+				verschilY = Math.abs(maxradiuspositionyLasttwo[0] - maxradiuspositionyLasttwo[1]);
+
+				zijdetussentweepunten = Math.sqrt((verschilX * verschilX) + (verschilY * verschilY));
+
+				precessionAngle = (2 * (Math.asin((zijdetussentweepunten / 2) / (maxRadius)))) * (180 / Math.PI);
+
+
+
+			}
+
+
+		}
+
+		if (roundedpositionX > 0){
+			onetime = 0;
+		}
+		console.log(maxradiuspositionx);
+		console.log("inaccuracyvalue =", inaccuracyvalue);
+		console.log("zijdetussentweepunten", zijdetussentweepunten);
+		console.log(maxradiuspositionxLasttwo);
+		console.log(maxradiuspositionyLasttwo);
+		console.log(maxradiuspositiony);
+		console.log("verschilX", verschilX);
+		console.log("verschilY", verschilY);
+		console.log(precessionAngle);
 }
 
 function Vector (x, y) {
