@@ -57,6 +57,10 @@ var maxradiuspositionxLasttwo = [0,0];
 var maxradiuspositionyMidvalue = 0;
 var maxradiuspositionyLasttwo = [0,0];
 
+var maxradiusCurrent = [];
+var maxradiusCurrentLargest;
+var largestArrayposition;
+
 var verschilX = 0;
 var verschilY = 0;
 var zijdetussentweepunten = 0;
@@ -109,6 +113,7 @@ function setup (){
 		minRadius = 0;
 		maxradiuspositionx = [];
 		maxradiuspositiony = [];
+		maxradiusCurrent = [];
 		maxradiuspositionxLasttwo = [0,0];
 		maxradiuspositionyLasttwo = [0,0];
 		precessionAngle = 0;
@@ -457,23 +462,28 @@ function PrecessionAngle () {
 		var roundedRadius = Number(dwarfRadius.toFixed(0));
 		var roundedmaxRadius = Number(maxRadius.toFixed(0));
 		var roundedpositionX = Number(dwarf.position.x).toFixed(0);
-		var inaccuracyvalue = Number(maxRadius * 0.01);
+		var inaccuracyvalue = Number(maxRadius * 0.02);
 
 		if (Number(dwarfRadius) >= (Number(maxRadius) - inaccuracyvalue) && Number(dwarfRadius) <= (Number(maxRadius) + inaccuracyvalue)){
 			maxradiuspositionx.unshift(dwarf.position.x);
 			maxradiuspositiony.unshift(dwarf.position.y);
+			maxradiusCurrent.unshift(dwarfRadius);
 		}
 
 		if (roundedpositionX < 0){
 			if (onetime < 1){
 				onetime++;
 
-				maxradiuspositionxMidvalue = maxradiuspositionx[(Math.round((maxradiuspositionx.length - 1) / 2))];
+				maxradiusCurrentLargest = Math.max.apply(Math, maxradiusCurrent);
+				largestArrayposition = maxradiusCurrent.indexOf(maxradiusCurrentLargest);
+				maxradiusCurrent = [];
+
+				maxradiuspositionxMidvalue = maxradiuspositionx[largestArrayposition];
 				maxradiuspositionxLasttwo.unshift(maxradiuspositionxMidvalue);
 				maxradiuspositionxLasttwo.pop();
 				maxradiuspositionx = [];
 
-				maxradiuspositionyMidvalue = maxradiuspositiony[(Math.round((maxradiuspositiony.length - 1) / 2))];
+				maxradiuspositionyMidvalue = maxradiuspositiony[largestArrayposition];
 				maxradiuspositionyLasttwo.unshift(maxradiuspositionyMidvalue);
 				maxradiuspositionyLasttwo.pop();
 				maxradiuspositiony = [];
@@ -496,15 +506,17 @@ function PrecessionAngle () {
 		if (roundedpositionX > 0){
 			onetime = 0;
 		}
-		console.log(maxradiuspositionx);
-		console.log("inaccuracyvalue =", inaccuracyvalue);
-		console.log("zijdetussentweepunten", zijdetussentweepunten);
-		console.log(maxradiuspositionxLasttwo);
-		console.log(maxradiuspositionyLasttwo);
-		console.log(maxradiuspositiony);
-		console.log("verschilX", verschilX);
-		console.log("verschilY", verschilY);
-		console.log(precessionAngle);
+		// console.log(maxradiuspositionx);
+		// console.log("inaccuracyvalue =", inaccuracyvalue);
+		// console.log("zijdetussentweepunten", zijdetussentweepunten);
+		// console.log(maxradiuspositionxLasttwo);
+		// console.log(maxradiuspositionyLasttwo);
+		// console.log(maxradiuspositiony);
+		// console.log("verschilX", verschilX);
+		// console.log("verschilY", verschilY);
+		// console.log(precessionAngle);
+		// console.log(largestArrayposition);
+		// console.log(maxradiusCurrentLargest);
 }
 
 function Vector (x, y) {
