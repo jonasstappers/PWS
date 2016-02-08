@@ -79,7 +79,7 @@ setup();
 
 
 
-
+// Setting variables 
 function setup (){
     sVar = Number(radius.value);
     scale = 400 / sVar;
@@ -108,17 +108,19 @@ function setup (){
 	G = Number(gravConst.value);
 	dtScalar = deltaTime.value;
 
-    ScaleValues();
-		maxRadius = 0;
-		minRadius = 0;
-		maxradiuspositionx = [];
-		maxradiuspositiony = [];
-		maxradiusCurrent = [];
-		maxradiuspositionxLasttwo = [0,0];
-		maxradiuspositionyLasttwo = [0,0];
-		precessionAngle = 0;
+    	ScaleValues();
+    	
+	maxRadius = 0;
+	minRadius = 0;
+	maxradiuspositionx = [];
+	maxradiuspositiony = [];
+	maxradiusCurrent = [];
+	maxradiuspositionxLasttwo = [0,0];
+	maxradiuspositionyLasttwo = [0,0];
+	precessionAngle = 0;
 }
 
+// function that loops the main functions
 function mainLoop(){
 	Calc();
 	Draw();
@@ -138,6 +140,7 @@ function mainLoop(){
 
 requestAnimationFrame(mainLoop);
 
+//Does all the physics calculations
 function Calc (){
 
 	forceDwarf = planet.position.clone().subtract(dwarf.position);
@@ -200,11 +203,13 @@ function Calc (){
 
 }
 
+//calculates the first term
 function GravForce (r){
 	var grav = (G * dwarf.mass * planet.mass) / r;
 	return -grav;
 }
 
+//calculates the second term
 function Momentum(r) {
 	var angle = Math.acos(dwarf.velocity.clone().normalize().dot(forceDwarf));
 	// console.log("Angle: " + angle);
@@ -216,6 +221,7 @@ function Momentum(r) {
 	return mom;
 }
 
+//calculates the third term
 function Relativity(r) {
 	var angle = Math.acos(dwarf.velocity.clone().normalize().dot(forceDwarf));
 	var L = r * Number(dwarf.mass) * dwarf.velocity.clone().magnitude() * Math.sin(angle);
@@ -223,7 +229,7 @@ function Relativity(r) {
 	return -rel;
 }
 
-
+//displays the calulated values on the screen
 function Draw (){
 	dwarf.element.style.marginLeft = (dwarf.position.x * scale) + "px";
 	dwarf.element.style.marginTop = (dwarf.position.y * scale) + "px";
@@ -277,6 +283,7 @@ function Draw (){
 // 		line1.setAttribute("y2",dwarfpositiony);
 // }
 
+// Function to display the radiusvalues on the grid
 function ScaleValues (){
 
     var radiusLength = radius.value.toString().length;
@@ -303,6 +310,7 @@ function ScaleValues (){
     }
 }
 
+// Set values Earth and Sun
 function EarthSun() {
     vDwarf.value = 29780;
     radius.value = 1.4960e11;
@@ -317,7 +325,7 @@ function EarthSun() {
 
     setup();
 }
-
+// Set fictional values to visualize precession
 function Precession() {
     vDwarf.value = 1;
     radius.value = 20;
@@ -333,6 +341,7 @@ function Precession() {
     setup();
 }
 
+// Set fictional values to visualize Ellips
 function Ellips() {
     vDwarf.value = 5;
     radius.value = 400;
@@ -348,6 +357,7 @@ function Ellips() {
     setup();
 }
 
+// Function to switch the grid on and of
 function ToggleGrid(){
     var toggleGrid = document.getElementById("background");
 
@@ -358,6 +368,7 @@ function ToggleGrid(){
     }
 }
 
+// Function to switch the Dashboard on and off
 function ToggleDashboard(){
     var toggleDashboard = document.getElementById("dashboard");
 
@@ -368,12 +379,14 @@ function ToggleDashboard(){
     }
 }
 
+// Function to randomly change the color of the trail and the planet
 function ChangeColor (){
     var randomColor = trailColors[Math.floor(Math.random() * trailColors.length)];
     trailColor = randomColor;
     document.getElementById("m").style.backgroundColor = randomColor;
 }
 
+// Function to display a trail behind the planet
 function OrbitTrail(){
     var trailDot = document.createElement("div");
     trailDot.id = "Dot";
@@ -385,6 +398,7 @@ function OrbitTrail(){
     trail.appendChild(trailDot);
 }
 
+// Function to delete the trail
 function ResetTrail (){
     var elem = document.getElementById("trail")
 
@@ -393,54 +407,56 @@ function ResetTrail (){
     }
 }
 
+// Function to display values in the dashboard
 function Value () {
-		var speedvalueLength = dwarfSpeed.toFixed(1).toString().length;
-		var radiusvalueLength = dwarfRadius.toFixed(1).toString().length;
-		var minradiusvalueLength = minRadius.toFixed(1).toString().length;
-		var maxradiusvalueLength = maxRadius.toFixed(1).toString().length;
-
-		if (speedvalueLength > 8) {
-			document.getElementById('speedvalue').innerHTML = dwarfSpeed.toExponential(3);
-		}
-		else {
-			document.getElementById('speedvalue').innerHTML = dwarfSpeed.toFixed(2);
-		}
-
-		if (radiusvalueLength > 8) {
-			document.getElementById('radiusvalue').innerHTML = dwarfRadius.toExponential(3);
-		}
-		else {
-			document.getElementById('radiusvalue').innerHTML = dwarfRadius.toFixed(2);
-		}
-
-		if (maxradiusvalueLength > 8) {
-			document.getElementById('maxradiusvalue').innerHTML = maxRadius.toExponential(3);
-		}
-		else {
-			document.getElementById('maxradiusvalue').innerHTML = maxRadius.toFixed(2);
-		}
-
-		if (minradiusvalueLength > 8) {
-			document.getElementById('minradiusvalue').innerHTML = minRadius.toExponential(3);
-		}
-		else {
-			document.getElementById('minradiusvalue').innerHTML = minRadius.toFixed(2);
-		}
-
-		if (precessionAngle == 0 || precessionAngle == NaN) {
-			document.getElementById('precessionanglevalue').innerHTML = "";
-		}
-		else if(precessionAngle > 0.1) {
-			document.getElementById('precessionanglevalue').innerHTML = precessionAngle.toFixed(2) + " &deg";
-		}
-		else if (precessionAngle <= 0.1 && precessionAngle >= 0.005) {
-			document.getElementById('precessionanglevalue').innerHTML = (precessionAngle.toFixed(2) * 60) + " '";
-		}
-		else if (precessionAngle <= 0.005) {
-			document.getElementById('precessionanglevalue').innerHTML = (precessionAngle.toFixed(2) * 3600) + " ''";
-		}
+	var speedvalueLength = dwarfSpeed.toFixed(1).toString().length;
+	var radiusvalueLength = dwarfRadius.toFixed(1).toString().length;
+	var minradiusvalueLength = minRadius.toFixed(1).toString().length;
+	var maxradiusvalueLength = maxRadius.toFixed(1).toString().length;
+	
+	if (speedvalueLength > 8) {
+		document.getElementById('speedvalue').innerHTML = dwarfSpeed.toExponential(3);
+	}
+	else {
+		document.getElementById('speedvalue').innerHTML = dwarfSpeed.toFixed(2);
+	}
+	
+	if (radiusvalueLength > 8) {
+		document.getElementById('radiusvalue').innerHTML = dwarfRadius.toExponential(3);
+	}
+	else {
+		document.getElementById('radiusvalue').innerHTML = dwarfRadius.toFixed(2);
+	}
+	
+	if (maxradiusvalueLength > 8) {
+		document.getElementById('maxradiusvalue').innerHTML = maxRadius.toExponential(3);
+	}
+	else {
+		document.getElementById('maxradiusvalue').innerHTML = maxRadius.toFixed(2);
+	}
+	
+	if (minradiusvalueLength > 8) {
+		document.getElementById('minradiusvalue').innerHTML = minRadius.toExponential(3);
+	}
+	else {
+		document.getElementById('minradiusvalue').innerHTML = minRadius.toFixed(2);
+	}
+	
+	if (precessionAngle == 0 || precessionAngle == NaN) {
+		document.getElementById('precessionanglevalue').innerHTML = "";
+	}
+	else if(precessionAngle > 0.1) {
+		document.getElementById('precessionanglevalue').innerHTML = precessionAngle.toFixed(2) + " &deg";
+	}
+	else if (precessionAngle <= 0.1 && precessionAngle >= 0.005) {
+		document.getElementById('precessionanglevalue').innerHTML = (precessionAngle.toFixed(2) * 60) + " '";
+	}
+	else if (precessionAngle <= 0.005) {
+		document.getElementById('precessionanglevalue').innerHTML = (precessionAngle.toFixed(2) * 3600) + " ''";
+	}
 }
 
+// Function to get the maximum  radius
 function MaxRadius () {
 		if (dwarfRadius > maxRadius) {
 			maxRadius = dwarfRadius;
@@ -448,6 +464,7 @@ function MaxRadius () {
 
 }
 
+// Function to get the minimum radius
 function MinRadius () {
 		if (minRadius == 0) {
 			minRadius = Number(Radius.value);
@@ -458,67 +475,60 @@ function MinRadius () {
 		}
 
 }
+
+// Function to calculate the precession angle
 function PrecessionAngle () {
-		var roundedRadius = Number(dwarfRadius.toFixed(0));
-		var roundedmaxRadius = Number(maxRadius.toFixed(0));
-		var roundedpositionX = Number(dwarf.position.x).toFixed(0);
-		var inaccuracyvalue = Number(maxRadius * 0.02);
+	var roundedRadius = Number(dwarfRadius.toFixed(0));
+	var roundedmaxRadius = Number(maxRadius.toFixed(0));
+	var roundedpositionX = Number(dwarf.position.x).toFixed(0);
+	var inaccuracyvalue = Number(maxRadius * 0.02);
 
-		if (Number(dwarfRadius) >= (Number(maxRadius) - inaccuracyvalue) && Number(dwarfRadius) <= (Number(maxRadius) + inaccuracyvalue)){
-			maxradiuspositionx.unshift(dwarf.position.x);
-			maxradiuspositiony.unshift(dwarf.position.y);
-			maxradiusCurrent.unshift(dwarfRadius);
-		}
+	if (Number(dwarfRadius) >= (Number(maxRadius) - inaccuracyvalue) && Number(dwarfRadius) <= (Number(maxRadius) + inaccuracyvalue)){
+		maxradiuspositionx.unshift(dwarf.position.x);
+		maxradiuspositiony.unshift(dwarf.position.y);
+		maxradiusCurrent.unshift(dwarfRadius);
+	}
 
-		if (roundedpositionX < 0){
-			if (onetime < 1){
-				onetime++;
+	if (roundedpositionX < 0){
+		if (onetime < 1){
+			onetime++;
 
-				maxradiusCurrentLargest = Math.max.apply(Math, maxradiusCurrent);
-				largestArrayposition = maxradiusCurrent.indexOf(maxradiusCurrentLargest);
-				maxradiusCurrent = [];
+			maxradiusCurrentLargest = Math.max.apply(Math, maxradiusCurrent);
+			largestArrayposition = maxradiusCurrent.indexOf(maxradiusCurrentLargest);
+			maxradiusCurrent = [];
 
-				maxradiuspositionxMidvalue = maxradiuspositionx[largestArrayposition];
-				maxradiuspositionxLasttwo.unshift(maxradiuspositionxMidvalue);
-				maxradiuspositionxLasttwo.pop();
-				maxradiuspositionx = [];
+			maxradiuspositionxMidvalue = maxradiuspositionx[largestArrayposition];
+			maxradiuspositionxLasttwo.unshift(maxradiuspositionxMidvalue);
+			maxradiuspositionxLasttwo.pop();
+			maxradiuspositionx = [];
 
-				maxradiuspositionyMidvalue = maxradiuspositiony[largestArrayposition];
-				maxradiuspositionyLasttwo.unshift(maxradiuspositionyMidvalue);
-				maxradiuspositionyLasttwo.pop();
-				maxradiuspositiony = [];
-
-
-				verschilX = Math.abs(maxradiuspositionxLasttwo[0] - maxradiuspositionxLasttwo[1]);
-				verschilY = Math.abs(maxradiuspositionyLasttwo[0] - maxradiuspositionyLasttwo[1]);
-
-				zijdetussentweepunten = Math.sqrt((verschilX * verschilX) + (verschilY * verschilY));
-
-				precessionAngle = (2 * (Math.asin((zijdetussentweepunten / 2) / (maxRadius)))) * (180 / Math.PI);
+			maxradiuspositionyMidvalue = maxradiuspositiony[largestArrayposition];
+			maxradiuspositionyLasttwo.unshift(maxradiuspositionyMidvalue);
+			maxradiuspositionyLasttwo.pop();
+			maxradiuspositiony = [];
 
 
+			verschilX = Math.abs(maxradiuspositionxLasttwo[0] - maxradiuspositionxLasttwo[1]);
+			verschilY = Math.abs(maxradiuspositionyLasttwo[0] - maxradiuspositionyLasttwo[1]);
 
-			}
+			zijdetussentweepunten = Math.sqrt((verschilX * verschilX) + (verschilY * verschilY));
+
+			precessionAngle = (2 * (Math.asin((zijdetussentweepunten / 2) / (maxRadius)))) * (180 / Math.PI);
+
 
 
 		}
 
-		if (roundedpositionX > 0){
-			onetime = 0;
-		}
-		// console.log(maxradiuspositionx);
-		// console.log("inaccuracyvalue =", inaccuracyvalue);
-		// console.log("zijdetussentweepunten", zijdetussentweepunten);
-		// console.log(maxradiuspositionxLasttwo);
-		// console.log(maxradiuspositionyLasttwo);
-		// console.log(maxradiuspositiony);
-		// console.log("verschilX", verschilX);
-		// console.log("verschilY", verschilY);
-		// console.log(precessionAngle);
-		// console.log(largestArrayposition);
-		// console.log(maxradiusCurrentLargest);
+
+	}
+
+	if (roundedpositionX > 0){
+		onetime = 0;
+	}
+
 }
 
+//Funtions for the vector calulations
 function Vector (x, y) {
     if (!(this instanceof Vector)){
         return new Vector(x, y);
