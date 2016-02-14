@@ -157,27 +157,27 @@ function Calc (){
 	mu = (dwarf.mass * planet.mass) / (dwarf.mass + planet.mass);
 	//console.log("mu: " + mu);
 	// console.log("L: " + L);
-	var gravforce = (GravForce(distance + h) - GravForce(distance)) / h;
-	var momentum = (Momentum(distance + h) - Momentum(distance)) / h;
-	var relativity = (Relativity(distance + h) - Relativity(distance)) / h;
+	var firstTerm = (FirstTerm(distance + h) - FirstTerm(distance)) / h;
+	var secondTerm = (SecondTerm(distance + h) - SecondTerm(distance)) / h;
+	var thirdTerm = (ThirdTerm(distance + h) - ThirdTerm(distance)) / h;
 
-	//console.log("momentum: " + Momentum(distance));
+	//console.log("secondTerm: " + secondTerm(distance));
 
 	// var angle = Math.acos(dwarf.velocity.clone().normalize().dot(forceDwarf));
 	// var L = distance * dwarf.mass * dwarf.velocity.clone().magnitude() * Math.sin(Math.PI - angle);
 
-	// var gravforce = (G * planet.mass * dwarf.mass) / Math.pow(distance, 2);
-	// var momentum = Math.pow(L, 2) / (mu * Math.pow(distance, 3));
-	// var relativity = (3 * G * planet.mass * Math.pow(L, 2)) / (Math.pow(c, 2) * Math.pow(distance, 4));
+	// var firstTerm = (G * planet.mass * dwarf.mass) / Math.pow(distance, 2);
+	// var secondTerm = Math.pow(L, 2) / (mu * Math.pow(distance, 3));
+	// var thirdTerm = (3 * G * planet.mass * Math.pow(L, 2)) / (Math.pow(c, 2) * Math.pow(distance, 4));
 
 	// console.log("g: " + firstterm);
 	// console.log("m: " + secondterm);
 	// console.log("r: " + thirdterm);
 
 	if (radiocheck){
-		var force = gravforce + momentum + relativity;
+		var force = firstTerm + secondTerm + thirdTerm;
 	} else{
-		var force = gravforce;
+		var force = firstTerm;
 	}
 
 	// console.log(force);
@@ -204,29 +204,29 @@ function Calc (){
 }
 
 //calculates the first term
-function GravForce (r){
+function FirstTerm (r){
 	var grav = (G * dwarf.mass * planet.mass) / r;
 	return -grav;
 }
 
 //calculates the second term
-function Momentum(r) {
+function SecondTerm(r) {
 	var angle = Math.acos(dwarf.velocity.clone().normalize().dot(forceDwarf));
 	// console.log("Angle: " + angle);
 	var L = r * Number(dwarf.mass) * dwarf.velocity.clone().magnitude() * Math.sin(angle);
 	// console.log("L: " + L);
-	var mom = (L * L) / (2 * mu * r * r);
+	var sec = (L * L) / (2 * mu * r * r);
 	// console.log("Mom: " + mom);
 	// console.log("r: " + r);
-	return mom;
+	return sec;
 }
 
 //calculates the third term
-function Relativity(r) {
+function ThirdTerm(r) {
 	var angle = Math.acos(dwarf.velocity.clone().normalize().dot(forceDwarf));
 	var L = r * Number(dwarf.mass) * dwarf.velocity.clone().magnitude() * Math.sin(angle);
-	var rel = ((G * dwarf.mass + G * planet.mass) * (L * L)) / (c * c * mu * r * r * r);
-	return -rel;
+	var thi = ((G * dwarf.mass + G * planet.mass) * (L * L)) / (c * c * mu * r * r * r);
+	return -thi;
 }
 
 //displays the calulated values on the screen
